@@ -1,0 +1,732 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Vérificateur de dossier — AgriTwin</title>
+    <style>
+      :root {
+        --forest: #14532d;
+        --green: #15803d;
+        --green-light: #16a34a;
+        --ink: #0f172a;
+        --muted: #64748b;
+        --line: #e3e9f1;
+        --bg: #f8fafc;
+        --amber: #d97706;
+        --red: #dc2626;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      header {
+        background: var(--ink);
+        color: #fff;
+        padding: 20px 18px;
+        border-bottom: 3px solid var(--green);
+      }
+      header .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+        font-size: 19px;
+      }
+      header .brand span {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background: var(--green-light);
+      }
+      header p {
+        margin: 6px 0 0;
+        color: #cbd5e1;
+        font-size: 12.5px;
+        max-width: 720px;
+      }
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 18px 14px 48px;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 12px;
+      }
+      .eyebrow {
+        margin: 0;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      h1 {
+        margin: 4px 0 6px;
+        font-size: 22px;
+        line-height: 1.25;
+        letter-spacing: -0.02em;
+      }
+      h2 {
+        margin: 0 0 10px;
+        font-size: 15px;
+        letter-spacing: -0.01em;
+      }
+      p { margin: 0 0 8px; }
+      .lead { color: var(--muted); font-size: 13.5px; }
+      .drop {
+        display: block;
+        border: 1.5px dashed #b9c6d6;
+        border-radius: 10px;
+        background: #fff;
+        padding: 26px 16px;
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.15s, background 0.15s;
+      }
+      .drop:hover, .drop.over { border-color: var(--green); background: #f0fdf4; }
+      .drop strong { display: block; font-size: 14px; }
+      .drop span { color: var(--muted); font-size: 12px; }
+      .drop input { display: none; }
+      .files {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 10px 0 0;
+      }
+      .filechip {
+        border: 1px solid var(--line);
+        background: #fff;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 11px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        color: #475569;
+      }
+      .banner {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        border: 1px solid;
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 12px;
+      }
+      .banner .mark { font-size: 20px; line-height: 1; }
+      .banner strong { display: block; font-size: 14px; }
+      .banner p { margin: 2px 0 0; font-size: 12px; }
+      .banner.ok { border-color: #bbf7d0; background: #f0fdf4; color: #14532d; }
+      .banner.bad { border-color: #fecaca; background: #fef2f2; color: #991b1b; }
+      .banner.warn { border-color: #fde68a; background: #fffbeb; color: #92400e; }
+      .checks {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .checks li {
+        display: flex;
+        gap: 10px;
+        padding: 10px 12px;
+        border-bottom: 1px solid #eef3f8;
+        font-size: 12.5px;
+      }
+      .checks li:last-child { border-bottom: 0; }
+      .checks .state { flex: 0 0 auto; font-weight: 800; }
+      .checks .ok { color: var(--green); }
+      .checks .bad { color: var(--red); }
+      .checks .skip { color: var(--muted); }
+      .checks .detail { color: var(--muted); display: block; font-size: 11.5px; }
+      code, .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 11px;
+        word-break: break-all;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      @media (min-width: 640px) {
+        .grid { grid-template-columns: 1fr 1fr; }
+        main { padding: 22px 18px 60px; }
+      }
+      .kv {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      .kv td {
+        padding: 5px 0;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: top;
+      }
+      .kv td:first-child { color: var(--muted); padding-right: 10px; }
+      .kv td:last-child { text-align: right; font-weight: 600; }
+      .score {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin: 2px 0 10px;
+      }
+      .score b { font-size: 34px; line-height: 1; letter-spacing: -0.03em; }
+      .score span { color: var(--muted); font-size: 12px; }
+      details {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 12.5px;
+        color: #475569;
+      }
+      details summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+      details p { margin: 8px 0 0; }
+      .hidden { display: none !important; }
+      .muted { color: var(--muted); }
+      .accent { color: var(--green); }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="brand"><span></span>AgriTwin · Vérificateur de dossier</div>
+      <p>
+        Contrôle local d'une archive de crédit : recalcul intégral de la chaîne SHA-256, du Score
+        Vert et de l'empreinte du PDF. Aucune connexion réseau, aucun serveur, aucune clé.
+      </p>
+    </header>
+
+    <main>
+      <section class="card">
+        <p class="eyebrow">Hors ligne</p>
+        <h1>Vérifier une preuve de dossier</h1>
+        <p class="lead">
+          Déposez <code>preuve.json</code> (obligatoire) et <code>dossier-credit.pdf</code> (facultatif).
+          Tout est calculé dans votre navigateur ; aucun fichier n'est envoyé.
+        </p>
+      </section>
+
+      <label class="drop" id="drop">
+        <strong>Déposer les fichiers de l'archive</strong>
+        <span>preuve.json et dossier-credit.pdf, ou glissez-les ici</span>
+        <input id="file" type="file" multiple accept=".json,.pdf,application/json,application/pdf" />
+      </label>
+      <div class="files" id="files"></div>
+
+      <div id="output" class="hidden" style="margin-top: 12px">
+        <div id="banner" class="banner ok"></div>
+
+        <section class="card" id="identity-card"></section>
+
+        <section class="card">
+          <h2>Contrôles cryptographiques</h2>
+          <ul class="checks" id="checks"></ul>
+        </section>
+
+        <div class="grid">
+          <section class="card">
+            <h2>Score recalculé</h2>
+            <div class="score"><b id="score-total">—</b><span>/ 100 · <span id="profile">profil —</span></span></div>
+            <table class="kv" id="score-table"></table>
+          </section>
+          <section class="card">
+            <h2>Empreintes</h2>
+            <table class="kv" id="hash-table"></table>
+          </section>
+        </div>
+
+        <section class="card" id="pdf-card"></section>
+      </div>
+
+      <details style="margin-top: 12px">
+        <summary>Ce que cette vérification prouve — et ce qu'elle ne prouve pas</summary>
+        <p>
+          Un dossier valide ici signifie que chaque relevé correspond exactement à l'empreinte
+          enregistrée, que le chaînage vers le bloc précédent est continu, que l'empreinte globale
+          correspond et que le Score Vert se recalcule à l'identique avec le barème publié
+          (35 / 25 / 20 / 20). Si le PDF est déposé, son empreinte SHA-256 est comparée à celle
+          inscrite dans <code>preuve.json</code>.
+        </p>
+        <p>
+          En revanche, la chaîne SHA-256 est <strong>recalculable par quiconque</strong> : elle prouve
+          la cohérence interne et l'absence d'altération depuis la scellée, pas l'identité de
+          l'émetteur. Sans ancrage serveur ni signature matérielle, un dossier entièrement fabriqué
+          peut aussi produire une chaîne valide. Cette page ne remplace ni une expertise, ni un
+          horodatage qualifié, ni une vérification d'identité.
+        </p>
+      </details>
+    </main>
+
+    <script>
+      (function () {
+        'use strict';
+
+        /* ---------- SHA-256 en JavaScript pur (aucune API, fonctionne en file://) ---------- */
+        var K = [
+          0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4,
+          0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe,
+          0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f,
+          0x4a7484aa, 0x5cb0a9dc, 0x76f988da, 0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
+          0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc,
+          0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b,
+          0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070, 0x19a4c116,
+          0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+          0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7,
+          0xc67178f2
+        ];
+
+        function rotr(x, n) {
+          return ((x >>> n) | (x << (32 - n))) >>> 0;
+        }
+
+        function sha256Bytes(bytes) {
+          var length = bytes.length;
+          var total = Math.ceil((length + 9) / 64) * 64;
+          var padded = new Uint8Array(total);
+          padded.set(bytes);
+          padded[length] = 0x80;
+          var view = new DataView(padded.buffer);
+          view.setUint32(total - 8, Math.floor((length * 8) / 4294967296), false);
+          view.setUint32(total - 4, (length * 8) >>> 0, false);
+
+          var h = [
+            0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab,
+            0x5be0cd19
+          ];
+          var w = new Uint32Array(64);
+
+          for (var offset = 0; offset < total; offset += 64) {
+            var t;
+            for (t = 0; t < 16; t += 1) w[t] = view.getUint32(offset + t * 4, false);
+            for (t = 16; t < 64; t += 1) {
+              var s0 = (rotr(w[t - 15], 7) ^ rotr(w[t - 15], 18) ^ (w[t - 15] >>> 3)) >>> 0;
+              var s1 = (rotr(w[t - 2], 17) ^ rotr(w[t - 2], 19) ^ (w[t - 2] >>> 10)) >>> 0;
+              w[t] = (w[t - 16] + s0 + w[t - 7] + s1) >>> 0;
+            }
+            var a = h[0], b = h[1], c = h[2], d = h[3], e = h[4], f = h[5], g = h[6], hh = h[7];
+            for (t = 0; t < 64; t += 1) {
+              var S1 = (rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25)) >>> 0;
+              var ch = ((e & f) ^ (~e & g)) >>> 0;
+              var t1 = (hh + S1 + ch + K[t] + w[t]) >>> 0;
+              var S0 = (rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22)) >>> 0;
+              var maj = ((a & b) ^ (a & c) ^ (b & c)) >>> 0;
+              var t2 = (S0 + maj) >>> 0;
+              hh = g; g = f; f = e; e = (d + t1) >>> 0;
+              d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+            }
+            h[0] = (h[0] + a) >>> 0; h[1] = (h[1] + b) >>> 0;
+            h[2] = (h[2] + c) >>> 0; h[3] = (h[3] + d) >>> 0;
+            h[4] = (h[4] + e) >>> 0; h[5] = (h[5] + f) >>> 0;
+            h[6] = (h[6] + g) >>> 0; h[7] = (h[7] + hh) >>> 0;
+          }
+
+          var out = '';
+          for (var i = 0; i < 8; i += 1) out += h[i].toString(16).padStart(8, '0');
+          return out;
+        }
+
+        function utf8(text) {
+          return new TextEncoder().encode(text);
+        }
+
+        function sha256(text) {
+          return sha256Bytes(utf8(text));
+        }
+
+        /* ---------- Mêmes règles que src/utils/cryptoChain.ts et greenScoreEngine.ts ---------- */
+        var GENESIS = 'GENESIS-AGRITWIN-BMB';
+        var MOISTURE_MIN = 20;
+        var MOISTURE_MAX = 35;
+        var SATELLITE_TOLERANCE = 15;
+        var WEIGHTS = { water: 35, vegetation: 25, soil: 20, integrity: 20 };
+        var ELIGIBLE = 75;
+        var REVIEW = 50;
+
+        function num(value) {
+          return typeof value === 'number' && isFinite(value) ? value : NaN;
+        }
+
+        function canonicalPayload(r) {
+          return [
+            r.id,
+            r.timestamp,
+            r.deviceId,
+            r.dayIndex,
+            num(r.moisture15).toFixed(2),
+            num(r.moisture35).toFixed(2),
+            num(r.soilTemp).toFixed(2),
+            num(r.airTemp).toFixed(2),
+            num(r.airHumidity).toFixed(2),
+            num(r.rainfall).toFixed(2),
+            num(r.irrigation).toFixed(2),
+            num(r.ec).toFixed(3),
+            num(r.ph).toFixed(2),
+            num(r.battery).toFixed(0),
+            r.sealOk ? '1' : '0',
+            r.accelerometerMotion ? '1' : '0',
+            num(r.rssi).toFixed(0),
+            num(r.ndvi).toFixed(4),
+            num(r.sentinel1Humidity).toFixed(2),
+            r.source
+          ].join('|');
+        }
+
+        function computeScore(records, latest, chainValid) {
+          var daysInRange = 0;
+          for (var i = 0; i < records.length; i += 1) {
+            var value = num(records[i].moisture15);
+            if (value >= MOISTURE_MIN && value <= MOISTURE_MAX) daysInRange += 1;
+          }
+          var water = records.length === 0
+            ? 0
+            : Math.round((WEIGHTS.water * daysInRange) / records.length);
+          var vegetation = Math.min(WEIGHTS.vegetation, Math.round(num(latest.ndvi) * 32));
+          var ec = num(latest.ec);
+          var ph = num(latest.ph);
+          var soil = ec <= 1.4 && ph >= 6.0 && ph <= 7.5 ? WEIGHTS.soil : ec <= 2.0 ? 14 : 7;
+          var gap = Math.round(Math.abs(num(latest.moisture15) - num(latest.sentinel1Humidity)) * 10) / 10;
+          var integrity =
+            chainValid && latest.sealOk && gap <= SATELLITE_TOLERANCE ? WEIGHTS.integrity : 0;
+          var total = water + vegetation + soil + integrity;
+          return {
+            total: total,
+            water: water,
+            vegetation: vegetation,
+            soil: soil,
+            integrity: integrity,
+            profile: total >= ELIGIBLE ? 'A' : total >= REVIEW ? 'B' : 'C',
+            gap: gap,
+            daysInRange: daysInRange,
+            totalDays: records.length
+          };
+        }
+
+        /* ---------- Interface ---------- */
+        var state = { proof: null, proofName: null, pdfBytes: null, pdfName: null };
+        var fail = null;
+
+        var $ = function (id) { return document.getElementById(id); };
+        var output = $('output');
+
+        function esc(text) {
+          return String(text == null ? '' : text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
+        }
+
+        function renderFiles() {
+          var chips = [];
+          if (state.proofName) chips.push('preuve : ' + esc(state.proofName));
+          if (state.pdfName) chips.push('PDF : ' + esc(state.pdfName));
+          $('files').innerHTML = chips
+            .map(function (label) { return '<span class="filechip">' + label + '</span>'; })
+            .join('');
+        }
+
+        function addCheck(checks, ok, label, detail) {
+          checks.push({ state: ok === null ? 'skip' : ok ? 'ok' : 'bad', label: label, detail: detail });
+        }
+
+        function render() {
+          renderFiles();
+          if (!state.proof) {
+            output.classList.add('hidden');
+            return;
+          }
+          output.classList.remove('hidden');
+
+          var proof = state.proof;
+          var checks = [];
+          var valid = true;
+
+          var formatOk = proof && proof.format === 'agritwin-dossier/1';
+          addCheck(
+            checks,
+            formatOk,
+            'Format de preuve reconnu',
+            formatOk ? 'agritwin-dossier/1' : 'Format inconnu : ce fichier n’est pas une preuve AgriTwin.'
+          );
+          if (!formatOk) {
+            showBanner(false, 'Preuve illisible', 'Le fichier ne respecte pas le format agritwin-dossier/1.');
+            $('checks').innerHTML = renderChecks(checks);
+            $('identity-card').innerHTML = '';
+            $('score-table').innerHTML = '';
+            $('hash-table').innerHTML = '';
+            $('pdf-card').innerHTML = '';
+            $('score-total').textContent = '—';
+            $('profile').textContent = 'profil —';
+            return;
+          }
+
+          var dossier = proof.dossier || {};
+          var records = Array.isArray(proof.releves) ? proof.releves : [];
+          var genesis = (proof.chaine && proof.chaine.genesis) || GENESIS;
+
+          /* 1. Chaîne bloc par bloc */
+          var previous = genesis;
+          var brokenAt = null;
+          var checked = 0;
+          for (var i = 0; i < records.length; i += 1) {
+            var record = records[i] || {};
+            var expected = sha256(previous + '::' + canonicalPayload(record));
+            if (record.prevHash !== previous || record.hash !== expected) {
+              brokenAt = record.timestamp || 'bloc ' + (i + 1);
+              break;
+            }
+            previous = expected;
+            checked += 1;
+          }
+          var chainOk = records.length > 0 && brokenAt === null;
+          if (!chainOk) valid = false;
+          addCheck(
+            checks,
+            chainOk,
+            records.length === 0 ? 'Aucun relevé dans la preuve' : 'Chaîne de ' + records.length + ' blocs',
+            chainOk
+              ? 'Chaque empreinte et chaque lien vers le bloc précédent sont exacts.'
+              : 'Rupture au bloc « ' + brokenAt + ' » (' + checked + ' blocs valides avant).'
+          );
+
+          /* 2. Empreinte globale */
+          var declaredGlobal = (proof.chaine && proof.chaine.empreinteGlobale) || '';
+          var recalculatedGlobal = sha256(
+            records.map(function (r) { return r.hash || 'unsigned'; }).join('')
+          );
+          var globalOk = declaredGlobal === recalculatedGlobal;
+          if (!globalOk) valid = false;
+          addCheck(
+            checks,
+            globalOk,
+            'Empreinte globale de la chaîne',
+            globalOk ? 'Identique à celle inscrite dans la preuve.' : 'Calculée : ' + recalculatedGlobal
+          );
+
+          /* 3. Score recalculé */
+          var latest = records[records.length - 1];
+          var computed = latest ? computeScore(records, latest, chainOk) : null;
+          var declared = dossier.score || null;
+          var scoreOk = Boolean(
+            computed && declared &&
+            declared.total === computed.total &&
+            declared.water === computed.water &&
+            declared.vegetation === computed.vegetation &&
+            declared.soil === computed.soil &&
+            declared.integrity === computed.integrity
+          );
+          if (!scoreOk) valid = false;
+          addCheck(
+            checks,
+            scoreOk,
+            'Score Vert recalculé',
+            scoreOk
+              ? 'Total et quatre composantes identiques au barème 35 / 25 / 20 / 20.'
+              : computed
+                ? 'Déclaré ' + (declared ? declared.total : '—') + ', recalculé ' + computed.total + '.'
+                : 'Aucun relevé exploitable.'
+          );
+
+          /* 4. PDF */
+          var pdfEntry = null;
+          var files = Array.isArray(proof.fichiers) ? proof.fichiers : [];
+          for (var f = 0; f < files.length; f += 1) {
+            if (files[f] && files[f].role === 'dossier-pdf') pdfEntry = files[f];
+          }
+          if (state.pdfBytes) {
+            var pdfHash = sha256Bytes(state.pdfBytes);
+            var pdfOk = Boolean(pdfEntry && pdfEntry.sha256 === pdfHash);
+            if (!pdfOk) valid = false;
+            addCheck(
+              checks,
+              pdfOk,
+              'Empreinte du PDF',
+              pdfOk ? 'Le PDF déposé correspond à l’empreinte du dossier.' : 'PDF différent de celui scellé dans la preuve.'
+            );
+            $('pdf-card').innerHTML =
+              '<h2>PDF déposé</h2><table class="kv"><tr><td>Fichier</td><td>' + esc(state.pdfName) + '</td></tr>' +
+              '<tr><td>SHA-256 calculé</td><td class="mono">' + pdfHash.slice(0, 32) + '…</td></tr>' +
+              '<tr><td>SHA-256 attendu</td><td class="mono">' + (pdfEntry ? esc(pdfEntry.sha256.slice(0, 32)) + '…' : 'absent de la preuve') + '</td></tr></table>';
+          } else {
+            addCheck(
+              checks,
+              null,
+              'Empreinte du PDF non contrôlée',
+              pdfEntry
+                ? 'Déposez dossier-credit.pdf pour comparer son empreinte (' + esc(pdfEntry.sha256.slice(0, 16)) + '…).'
+                : 'Aucune empreinte PDF n’est inscrite dans cette preuve.'
+            );
+            $('pdf-card').innerHTML =
+              '<h2>PDF</h2><p class="muted" style="font-size:12.5px">Déposez <code>dossier-credit.pdf</code> avec la preuve pour vérifier que le document remis est bien celui qui a été scellé.</p>';
+          }
+
+          showBanner(
+            valid,
+            valid ? 'Dossier cohérent' : 'Dossier non conforme',
+            valid
+              ? 'Tous les contrôles disponibles passent. La chaîne, l’empreinte globale et le score sont identiques aux valeurs déclarées.'
+              : 'Au moins un contrôle échoue : le dossier a été modifié, incomplet ou ne correspond pas à sa preuve.'
+          );
+
+          /* Fiche d'identité */
+          var parcelle = dossier.parcelle || {};
+          var verification = dossier.verification || {};
+          var campagne = parcelle.campagne || {};
+          $('identity-card').innerHTML =
+            '<p class="eyebrow">Dossier</p>' +
+            '<h2 style="margin-top:2px">' + esc(proof.reference || parcelle.nom || 'Sans référence') + '</h2>' +
+            '<table class="kv">' +
+            row('Parcelle', esc(parcelle.nom || '—')) +
+            row('Titulaire', esc(parcelle.titulaire || '—')) +
+            row('Culture', esc((parcelle.culture || '—') + (parcelle.variete ? ' · ' + parcelle.variete : ''))) +
+            row('Surface', parcelle.surfaceHa != null ? esc(parcelle.surfaceHa) + ' ha' : '—') +
+            row('Boîtier', esc(parcelle.boitier || '—')) +
+            row('Campagne', esc((campagne.premierReleve || '—') + ' → ' + (campagne.dernierReleve || '—'))) +
+            row('Généré le', esc(proof.genereLe || '—')) +
+            row('Vérification', esc(verification.statut || 'non renseignée') + (verification.reviewer ? ' · ' + esc(verification.reviewer) : '')) +
+            '</table>';
+
+          $('checks').innerHTML = renderChecks(checks);
+
+          $('score-total').textContent = computed ? String(computed.total) : '—';
+          $('profile').textContent = computed ? 'profil ' + computed.profile : 'profil —';
+          $('score-table').innerHTML = computed
+            ? scoreRow('Régularité hydrique', declared, computed, 'water', '/ ' + WEIGHTS.water) +
+              scoreRow('Vigueur végétative', declared, computed, 'vegetation', '/ ' + WEIGHTS.vegetation) +
+              scoreRow('Santé du sol', declared, computed, 'soil', '/ ' + WEIGHTS.soil) +
+              scoreRow('Intégrité de la preuve', declared, computed, 'integrity', '/ ' + WEIGHTS.integrity) +
+              '<tr><td>Jours dans la plage 20–35 %</td><td>' + computed.daysInRange + ' / ' + computed.totalDays + '</td></tr>' +
+              '<tr><td>Écart sonde / radar</td><td>' + computed.gap + ' pts</td></tr>'
+            : '';
+
+          $('hash-table').innerHTML =
+            row('Algorithme', 'SHA-256') +
+            row('Blocs', String(records.length)) +
+            row('Genèse', '<span class="mono">' + esc(genesis) + '</span>') +
+            row('Empreinte recalculée', '<span class="mono">' + recalculatedGlobal.slice(0, 24) + '…</span>') +
+            row('Empreinte déclarée', '<span class="mono">' + esc(declaredGlobal.slice(0, 24)) + (declaredGlobal ? '…' : '—') + '</span>');
+        }
+
+        function row(label, value) {
+          return '<tr><td>' + label + '</td><td>' + value + '</td></tr>';
+        }
+
+        function scoreRow(label, declared, computed, key, suffix) {
+          var same = declared && declared[key] === computed[key];
+          return (
+            '<tr><td>' + label + '</td><td style="color:' + (same ? '#15803d' : '#dc2626') + '">' +
+            (declared ? esc(declared[key]) : '—') + ' → ' + computed[key] + ' ' + suffix +
+            (same ? ' ✓' : ' ✗') + '</td></tr>'
+          );
+        }
+
+        function renderChecks(checks) {
+          return checks
+            .map(function (item) {
+              var mark = item.state === 'ok' ? '✓' : item.state === 'bad' ? '✕' : '–';
+              var cls = item.state === 'ok' ? 'ok' : item.state === 'bad' ? 'bad' : 'skip';
+              return (
+                '<li><span class="state ' + cls + '">' + mark + '</span><span>' +
+                esc(item.label) + '<span class="detail">' + item.detail + '</span></span></li>'
+              );
+            })
+            .join('');
+        }
+
+        function showBanner(ok, title, text) {
+          var banner = $('banner');
+          banner.className = 'banner ' + (ok ? 'ok' : 'bad');
+          banner.innerHTML =
+            '<span class="mark">' + (ok ? '✓' : '✕') + '</span><div><strong>' + esc(title) +
+            '</strong><p>' + esc(text) + '</p></div>';
+        }
+
+        function readFile(file) {
+          return file.arrayBuffer().then(function (buffer) {
+            return new Uint8Array(buffer);
+          });
+        }
+
+        function handleFiles(list) {
+          var jobs = [];
+          for (var i = 0; i < list.length; i += 1) {
+            (function (file) {
+              var name = (file.name || '').toLowerCase();
+              if (name.slice(-5) === '.json' || file.type === 'application/json') {
+                jobs.push(
+                  readFile(file).then(function (bytes) {
+                    try {
+                      state.proof = JSON.parse(new TextDecoder().decode(bytes));
+                      state.proofName = file.name;
+                    } catch (error) {
+                      state.proof = null;
+                      state.proofName = null;
+                      fail = 'Le fichier JSON est illisible : ' + (error && error.message ? error.message : 'format invalide');
+                    }
+                  })
+                );
+              } else if (name.slice(-4) === '.pdf' || file.type === 'application/pdf') {
+                jobs.push(
+                  readFile(file).then(function (bytes) {
+                    state.pdfBytes = bytes;
+                    state.pdfName = file.name;
+                  })
+                );
+              }
+            })(list[i]);
+          }
+          Promise.all(jobs).then(function () {
+            if (fail) {
+              output.classList.remove('hidden');
+              showBanner(false, 'Fichier illisible', fail);
+              $('checks').innerHTML = '';
+              $('identity-card').innerHTML = '';
+              $('score-table').innerHTML = '';
+              $('hash-table').innerHTML = '';
+              $('pdf-card').innerHTML = '';
+              $('score-total').textContent = '—';
+              $('profile').textContent = 'profil —';
+              fail = null;
+              renderFiles();
+              return;
+            }
+            render();
+          });
+        }
+
+        $('file').addEventListener('change', function (event) {
+          handleFiles(event.target.files);
+          event.target.value = '';
+        });
+
+        var drop = $('drop');
+        ['dragenter', 'dragover'].forEach(function (name) {
+          drop.addEventListener(name, function (event) {
+            event.preventDefault();
+            drop.classList.add('over');
+          });
+        });
+        ['dragleave', 'drop'].forEach(function (name) {
+          drop.addEventListener(name, function (event) {
+            event.preventDefault();
+            drop.classList.remove('over');
+          });
+        });
+        drop.addEventListener('drop', function (event) {
+          if (event.dataTransfer && event.dataTransfer.files) handleFiles(event.dataTransfer.files);
+        });
+      })();
+    </script>
+  </body>
+</html>

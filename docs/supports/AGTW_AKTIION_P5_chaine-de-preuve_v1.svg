@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="p5t p5d">
+  <title id="p5t">P5 — Chaîne de preuve AgriTwin et branche fraude</title>
+  <desc id="p5d">Deux blocs de relevés chaînés par leur empreinte SHA-256, vérifiés bloc par bloc. Si la chaîne est valide, l'intégrité reste à 20 sur 20 ; si un hash recalculé diffère du hash stocké, le dossier est gelé et le décaissement suspendu.</desc>
+
+  <defs>
+    <marker id="p5-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#94a3b8"/>
+    </marker>
+    <marker id="p5-arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#b91c1c"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f8fafc"/>
+
+  <!-- En-tête -->
+  <text x="100" y="66" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2.2" fill="#15803d">AGTW · SUPPORT P5</text>
+  <text x="100" y="118" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="44" font-weight="600" fill="#0f172a">La chaîne de preuve, et la branche fraude</text>
+  <text x="100" y="152" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="17.5" fill="#5b6a7d">Bloc n−1 → hash → bloc n : toute réécriture casse le lien et se localise.</text>
+  <line x1="100" y1="180" x2="1500" y2="180" stroke="#e3e9f1" stroke-width="1"/>
+
+  <!-- Bloc n-1 -->
+  <g>
+    <rect x="100" y="210" width="400" height="200" rx="16" fill="#ffffff" stroke="#e6edf4"/>
+    <text x="124" y="242" font-family="IBM Plex Mono, Consolas, monospace" font-size="13" font-weight="600" fill="#14532d">BLOC n−1</text>
+    <text x="476" y="242" text-anchor="end" font-family="IBM Plex Mono, Consolas, monospace" font-size="11.5" fill="#94a3b8">17/11 · 06:00 UTC</text>
+    <line x1="124" y1="256" x2="476" y2="256" stroke="#eef3f8" stroke-width="1"/>
+    <text x="124" y="288" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">humidité 15 cm — 24,6 %</text>
+    <text x="124" y="314" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">humidité 35 cm — 27,1 %</text>
+    <text x="124" y="340" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">EC 1,21 dS/m · pH 6,4</text>
+    <text x="124" y="366" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">scellé intact · mouvement nul</text>
+    <line x1="124" y1="380" x2="476" y2="380" stroke="#eef3f8" stroke-width="1"/>
+    <text x="124" y="400" font-family="IBM Plex Mono, Consolas, monospace" font-size="12" fill="#0284c7">hash 3f9a…c41d</text>
+    <text x="476" y="400" text-anchor="end" font-family="IBM Plex Mono, Consolas, monospace" font-size="11" fill="#94a3b8">prev 8b2e…71af</text>
+  </g>
+
+  <!-- Bloc n -->
+  <g>
+    <rect x="560" y="210" width="400" height="200" rx="16" fill="#ffffff" stroke="#e6edf4"/>
+    <text x="584" y="242" font-family="IBM Plex Mono, Consolas, monospace" font-size="13" font-weight="600" fill="#14532d">BLOC n</text>
+    <text x="936" y="242" text-anchor="end" font-family="IBM Plex Mono, Consolas, monospace" font-size="11.5" fill="#94a3b8">17/11 · 06:30 UTC</text>
+    <line x1="584" y1="256" x2="936" y2="256" stroke="#eef3f8" stroke-width="1"/>
+    <text x="584" y="288" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">humidité 15 cm — 24,1 %</text>
+    <text x="584" y="314" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">humidité 35 cm — 26,9 %</text>
+    <text x="584" y="340" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">EC 1,24 dS/m · pH 6,4</text>
+    <text x="584" y="366" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">scellé intact · RSSI −82 dBm</text>
+    <line x1="584" y1="380" x2="936" y2="380" stroke="#eef3f8" stroke-width="1"/>
+    <text x="584" y="400" font-family="IBM Plex Mono, Consolas, monospace" font-size="12" fill="#0284c7">hash a41f…9e02</text>
+    <text x="936" y="400" text-anchor="end" font-family="IBM Plex Mono, Consolas, monospace" font-size="11" fill="#94a3b8">prev 3f9a…c41d</text>
+  </g>
+
+  <!-- Vérificateur -->
+  <g>
+    <rect x="1020" y="210" width="440" height="200" rx="16" fill="#ffffff" stroke="#cbd8e6"/>
+    <text x="1044" y="248" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="22" font-weight="600" fill="#0f172a">Vérificateur</text>
+    <line x1="1044" y1="262" x2="1436" y2="262" stroke="#eef3f8" stroke-width="1"/>
+    <text x="1044" y="292" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#475569">recalcule le SHA-256 du bloc</text>
+    <text x="1044" y="316" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#475569">compare au hash stocké</text>
+    <text x="1044" y="340" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#475569">contrôle le prevHash et la continuité</text>
+    <text x="1044" y="364" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#475569">produit une empreinte globale</text>
+    <line x1="1044" y1="380" x2="1436" y2="380" stroke="#eef3f8" stroke-width="1"/>
+    <text x="1044" y="400" font-family="IBM Plex Mono, Consolas, monospace" font-size="11.5" fill="#5b6a7d">empreinte 7c1d…40ae · 6 contrôles</text>
+  </g>
+
+  <!-- Flèches de chaînage -->
+  <g stroke="#94a3b8" stroke-width="1.6">
+    <line x1="508" y1="310" x2="552" y2="310" marker-end="url(#p5-arrow)"/>
+    <line x1="968" y1="310" x2="1012" y2="310" marker-end="url(#p5-arrow)"/>
+  </g>
+  <g font-family="IBM Plex Mono, Consolas, monospace" font-size="10" fill="#5b6a7d" text-anchor="middle">
+    <text x="530" y="298">prev</text>
+    <text x="990" y="298">bloc</text>
+  </g>
+
+  <!-- Branche -->
+  <g fill="none" stroke="#94a3b8" stroke-width="1.6">
+    <path d="M1240 410 L1240 458"/>
+    <path d="M810 458 L1300 458"/>
+    <path d="M810 458 L810 512" marker-end="url(#p5-arrow)"/>
+    <path d="M1300 458 L1300 512" stroke="#b91c1c" marker-end="url(#p5-arrow-red)"/>
+  </g>
+  <text x="1252" y="446" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.2" fill="#5b6a7d">DEUX SORTIES POSSIBLES</text>
+
+  <!-- Sortie valide -->
+  <g>
+    <rect x="620" y="520" width="380" height="190" rx="16" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <circle cx="652" cy="556" r="15" fill="#dcfce7" stroke="#86efac"/>
+    <path d="M645 556 L650 561 L660 550" fill="none" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="678" y="563" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="21" font-weight="600" fill="#14532d">Chaîne valide</text>
+    <text x="648" y="602" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#334155">Intégrité 20 / 20</text>
+    <text x="648" y="628" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#334155">Score inchangé, dossier scellé</text>
+    <text x="648" y="654" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#334155">PDF et archive opposables</text>
+    <text x="648" y="686" font-family="IBM Plex Mono, Consolas, monospace" font-size="11.5" fill="#15803d">aucune action requise</text>
+  </g>
+
+  <!-- Sortie fraude -->
+  <g>
+    <rect x="1110" y="520" width="380" height="190" rx="16" fill="#fef2f2" stroke="#fecaca"/>
+    <circle cx="1142" cy="556" r="15" fill="#fee2e2" stroke="#fca5a5"/>
+    <path d="M1136 550 L1148 562 M1148 550 L1136 562" fill="none" stroke="#b91c1c" stroke-width="2.2" stroke-linecap="round"/>
+    <text x="1168" y="563" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="21" font-weight="600" fill="#b91c1c">Fraude détectée</text>
+    <text x="1138" y="602" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#7f1d1d">hash recalculé ≠ hash stocké</text>
+    <text x="1138" y="628" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#7f1d1d">Intégrité 0 / 20 → score ≤ 80</text>
+    <text x="1138" y="654" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13.5" fill="#7f1d1d">Dossier gelé, décaissement suspendu</text>
+    <text x="1138" y="686" font-family="IBM Plex Mono, Consolas, monospace" font-size="11.5" fill="#b91c1c">bloc de rupture localisé</text>
+  </g>
+
+  <!-- Note de limite -->
+  <rect x="100" y="735" width="1400" height="76" rx="14" fill="#ffffff" stroke="#e3e9f1"/>
+  <text x="128" y="766" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="14" fill="#334155">Limite assumée : la chaîne prouve l'absence de réécriture locale, pas l'origine physique de la mesure.</text>
+  <text x="128" y="792" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#5b6a7d">D'où le scellé et l'accéléromètre : un arrachement du boîtier est un événement signé, lui aussi.</text>
+
+  <!-- Pied -->
+  <line x1="100" y1="828" x2="1500" y2="828" stroke="#e3e9f1" stroke-width="1"/>
+  <text x="100" y="858" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#94a3b8">AgriTwin · AKTIION 2026 — École Polytechnique de Thiès</text>
+  <text x="1500" y="858" text-anchor="end" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#94a3b8">P5 — Chaîne de preuve · bloc n−1 → hash → bloc n</text>
+</svg>
