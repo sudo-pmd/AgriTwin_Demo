@@ -1,0 +1,813 @@
+% ============================================================
+%  AGRITWIN — Rapport de Projet — Prix de l'Innovation 2026
+%  Polytech Innovation Day — École Polytechnique de Thiès
+%  Mise en page calquée sur le modèle fourni (Yoonwi).
+% ============================================================
+
+\documentclass[12pt, a4paper]{article}
+
+% ── Encodage & langue ──────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+% ── Typographie ────────────────────────────────────────────
+\usepackage[stretch=10,shrink=10,expansion=false]{microtype}
+\usepackage{setspace}
+\setstretch{1.3}
+
+% ── Mise en page ───────────────────────────────────────────
+\usepackage[top=2.5cm, bottom=2.8cm, left=3cm, right=3cm]{geometry}
+
+% ── Couleurs ───────────────────────────────────────────────
+\usepackage{xcolor}
+\definecolor{primary}{HTML}{14532D}
+\definecolor{accent}{HTML}{15803D}
+\definecolor{lightbg}{HTML}{F0FDF4}
+\definecolor{rule}{HTML}{CBD5E1}
+\definecolor{dark}{HTML}{0F172A}
+\definecolor{muted}{HTML}{5B6A7D}
+\definecolor{mygreen}{HTML}{15803D}
+\definecolor{techblue}{HTML}{0284C7}
+
+% ── Graphiques ─────────────────────────────────────────────
+\usepackage{graphicx}
+\usepackage{relsize}
+\usepackage{tikz}
+\usetikzlibrary{positioning, arrows.meta, shapes.geometric}
+
+% ── Tableaux ───────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{array}
+
+% ── Boîtes légères ─────────────────────────────────────────
+\usepackage{mdframed}
+\mdfdefinestyle{primary}{
+  linecolor=primary, linewidth=1.2pt,
+  backgroundcolor=primary!5,
+  leftline=true, rightline=false, topline=false, bottomline=false,
+  innerleftmargin=12pt, innertopmargin=8pt, innerbottommargin=8pt,
+  skipabove=8pt, skipbelow=8pt
+}
+\mdfdefinestyle{accent}{
+  linecolor=accent, linewidth=1.2pt,
+  backgroundcolor=accent!7,
+  leftline=true, rightline=false, topline=false, bottomline=false,
+  innerleftmargin=12pt, innertopmargin=8pt, innerbottommargin=8pt,
+  skipabove=8pt, skipbelow=8pt
+}
+\mdfdefinestyle{neutral}{
+  linecolor=rule, linewidth=0.8pt,
+  backgroundcolor=lightbg,
+  leftline=true, rightline=false, topline=false, bottomline=false,
+  innerleftmargin=12pt, innertopmargin=8pt, innerbottommargin=8pt,
+  skipabove=8pt, skipbelow=8pt
+}
+
+% ── En-têtes & pieds de page ───────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{primary}{\textbf{AGRITWIN}}%
+  \quad\textcolor{rule}{|}\quad\small\textcolor{muted}{Prix de l'Innovation 2026}}
+\fancyhead[R]{\small\textcolor{muted}{Polytech Innovation Day — EPT}}
+\fancyfoot[C]{\small\textcolor{muted}{\thepage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{primary}%
+  \leaders\hrule height \headrulewidth\hfill}}
+
+% ── Sections ───────────────────────────────────────────────
+\usepackage{titlesec}
+\titleformat{\section}
+  {\color{primary}\large\bfseries}
+  {\thesection.}{0.6em}{\MakeUppercase}
+  [\vspace{2pt}\textcolor{accent}{\rule{\linewidth}{1.5pt}}]
+
+\titleformat{\subsection}
+  {\color{dark}\normalsize\bfseries}
+  {\thesubsection.}{0.5em}{}
+
+\titleformat{\subsubsection}
+  {\color{primary}\normalsize\itshape\bfseries}
+  {}{0em}{}
+
+\titlespacing{\section}{0pt}{20pt}{8pt}
+\titlespacing{\subsection}{0pt}{12pt}{4pt}
+\titlespacing{\subsubsection}{0pt}{8pt}{2pt}
+
+% ── Liens ──────────────────────────────────────────────────
+\usepackage[
+  colorlinks=true, linkcolor=primary,
+  urlcolor=accent, citecolor=mygreen,
+  pdftitle={AgriTwin — Prix de l'Innovation 2026},
+  pdfauthor={Equipe AgriTwin — EPT}
+]{hyperref}
+
+% ── Listes ─────────────────────────────────────────────────
+\usepackage{enumitem}
+\setlist[itemize]{
+  leftmargin=1.5em,
+  label=\textcolor{accent}{\small$\bullet$},
+  itemsep=3pt, topsep=4pt
+}
+\setlist[enumerate]{itemsep=3pt, topsep=4pt}
+
+% ── Table des matières ─────────────────────────────────────
+\usepackage{tocloft}
+\renewcommand{\cftsecfont}{\bfseries\color{primary}}
+\renewcommand{\cftsecpagefont}{\bfseries\color{primary}}
+\renewcommand{\cftsubsecfont}{\color{dark}}
+\renewcommand{\cftsubsecpagefont}{\color{dark}}
+
+% ══════════════════════════════════════════════════════════
+\begin{document}
+% ══════════════════════════════════════════════════════════
+
+% ──────────────────────────────────────────────────────────
+%  PAGE DE GARDE
+% ──────────────────────────────────────────────────────────
+\thispagestyle{empty}
+
+\vspace*{1cm}
+
+\begin{center}
+
+  % ── Emplacement du logo : remplacer le cadre par ────────
+  %    \includegraphics[width=3cm]{agritwin-logo.png}
+  \begin{tikzpicture}
+    \draw[rule, line width=0.6pt, rounded corners=4pt] (0,0) rectangle (3,3);
+    \node[text=muted, font=\small\itshape] at (1.5,1.5) {Logo};
+  \end{tikzpicture}
+  % ───────────────────────────────────────────────────────
+
+  \vspace{0.2cm}
+  {\color{rule}\rule{5cm}{0.4pt}}
+
+  \vspace{1.8cm}
+  {\Huge\textbf{\textcolor{primary}{\scalebox{2.5}{AGRITWIN}}}}
+
+  \vspace{0.5cm}
+  {\large\textcolor{accent}{Le jumeau numérique qui transforme une parcelle en preuve de crédit}}
+
+  \vspace{0.4cm}
+  \textcolor{rule}{\rule{10cm}{0.4pt}}
+
+  \vspace{0.6cm}
+  {\normalsize\textcolor{muted}{\itshape
+    \og{}L'ingénierie face aux enjeux du financement de l'agriculture familiale\fg{}}}
+
+  \vspace{0.3cm}
+  {\small\textbf{\textcolor{dark}{Prix de l'Innovation 2026 — Polytech Innovation Day}}}
+
+  \vspace{2.6cm}
+
+  \begin{tabular}{ll}
+    \textcolor{primary}{\textbf{[Prénom Nom]}} & [Formation] \\[5pt]
+    \textcolor{primary}{\textbf{[Prénom Nom]}} & [Formation] \\[5pt]
+    \textcolor{primary}{\textbf{[Prénom Nom]}} & [Formation] \\[5pt]
+    \textcolor{primary}{\textbf{[Prénom Nom]}} & [Formation] \\
+  \end{tabular}
+
+  \vspace{1.3cm}
+  \textcolor{rule}{\rule{10cm}{0.4pt}}
+
+  \vspace{0.4cm}
+  {\small\textcolor{muted}{École Polytechnique de Thiès \quad — \quad Juin 2026}}
+
+\end{center}
+
+\newpage
+
+% ──────────────────────────────────────────────────────────
+%  TABLE DES MATIÈRES
+% ──────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ══════════════════════════════════════════════════════════
+\section{Fiche d'identification du projet}
+% ══════════════════════════════════════════════════════════
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}p{4.2cm} X}
+  \toprule
+  \rowcolor{lightbg}
+  \multicolumn{2}{l}{\textbf{\textcolor{primary}{Dossier de candidature — Prix de l'Innovation 2026}}} \\
+  \midrule
+  Titre du projet & \textbf{AgriTwin} — Jumeau numérique de parcelle et Score Vert opposable \\
+  \addlinespace
+  Porteurs du projet & [Prénom Nom] · [Prénom Nom] · [Prénom Nom] · [Prénom Nom] \\
+  \addlinespace
+  Établissement & École Polytechnique de Thiès (EPT) \\
+  \addlinespace
+  Formation d'appartenance & [GEM / GIT / GA…] \\
+  \addlinespace
+  Encadrant académique & [Nom de l'encadrant, le cas échéant] \\
+  \addlinespace
+  Contact & [adresse électronique] · [téléphone] \\
+  \addlinespace
+  Domaine & Agriculture numérique, finance rurale, traçabilité \\
+  \addlinespace
+  Niveau de maturité & Prototype fonctionnel (TRL 4) — données simulées \\
+  \addlinespace
+  Prototype & [URL du prototype à compléter] \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{mdframed}[style=neutral]
+\textbf{À compléter avant dépôt.} Les champs entre crochets sont volontairement laissés vides : remplacer les noms, la formation, l'encadrant, le contact et l'URL. Le cadre du logo en page de garde s'ouvre avec \texttt{\textbackslash includegraphics}.
+\end{mdframed}
+
+% ══════════════════════════════════════════════════════════
+\section{Résumé exécutif}
+% ══════════════════════════════════════════════════════════
+
+\begin{mdframed}[style=accent]
+\textbf{AgriTwin} transforme les relevés d'un boîtier scellé, les observations
+satellite et les pièces d'un dossier en un \textbf{Score Vert} vérifiable, qu'un
+exploitant agricole, une institution de microfinance et un agent de conformité
+consultent dans la même application — sans base de données distante, sans API
+payante et sans GPS embarqué sur le matériel.
+\end{mdframed}
+
+\vspace{0.4cm}
+
+Le problème n'est pas l'absence de données agricoles, mais l'\textbf{absence de preuve
+opposable}. Un producteur de Bambey peut déclarer 1,5 hectare d'oignon ; la banque, elle,
+n'a aucun moyen de vérifier ni la surface, ni la culture, ni la réalité des relevés qui
+justifieraient un crédit d'intrants. La vérification coûte plus cher que le crédit
+lui-même. Le résultat est connu : les petits producteurs restent hors du système financier
+formel, ou empruntent à des taux qui absorbent leur marge.
+
+AgriTwin renverse la logique : la preuve est produite \emph{au moment de la mesure},
+signée, chaînée, puis restituée sous forme de score décomposé et d'un dossier exportable.
+Le prototype présenté ici couvre l'intégralité du parcours — déclaration géolocalisée,
+contrôle de conformité, surveillance continue, détection de fraude, audit cryptographique,
+décision bancaire — et fonctionne entièrement dans un navigateur.
+
+\vspace{0.5cm}
+
+\begin{center}
+\begin{tabular}{p{4.2cm} p{4.2cm} p{4.2cm}}
+  \toprule
+  \rowcolor{lightbg}
+  \textbf{\textcolor{primary}{Problème}} &
+  \textbf{\textcolor{primary}{Solution}} &
+  \textbf{\textcolor{primary}{Impact visé}} \\
+  \midrule
+  Déclarations invérifiables, relevés non opposables, coût de contrôle prohibitif. &
+  Boîtier scellé, chaîne SHA-256, Score Vert décomposé, portail prêteur sous consentement. &
+  Dossiers instruisibles à distance, délais de décision réduits, accès au crédit élargi. \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+% ══════════════════════════════════════════════════════════
+\section{Présentation synthétique de la problématique}
+% ══════════════════════════════════════════════════════════
+
+\subsection{Un crédit agricole bloqué par l'incertitude}
+
+Le financement de campagne repose sur trois vérifications que personne ne peut faire à
+coût raisonnable : \textbf{la parcelle existe-t-elle} avec la surface déclarée,
+\textbf{la culture est-elle réellement conduite} comme annoncé, et \textbf{les résultats
+techniques} (eau, azote, santé du sol) sont-ils ceux qui justifient le montant demandé.
+
+\begin{mdframed}[style=primary]
+Au Sénégal, l'obstacle n'est pas le manque de moyens de production, mais \textbf{le manque
+de preuve vérifiable} sur ces moyens. Un agent qui doit se déplacer, mesurer et attester
+coûte plus cher que la marge du dossier : la vérification n'a pas lieu, et le crédit est
+refusé ou renchéri.
+\end{mdframed}
+
+\subsection{Quatre frictions observées sur le terrain}
+
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}l X}
+  \toprule
+  \rowcolor{lightbg}
+  Situation & Friction vécue \\
+  \midrule
+  Déclaration de surface
+    & Surface annoncée non concordante, contour absent, pas de photo horodatée \\
+  \addlinespace
+  Contrôle des pièces
+    & Pièces papier, copies non vérifiables, dossiers perdus entre deux guichets \\
+  \addlinespace
+  Suivi de campagne
+    & Aucun historique de l'irrigation ni des apports : la banque ne peut pas expliquer un échec \\
+  \addlinespace
+  Aléa et fraude
+    & Un relevé peut être fabriqué ; rien ne permet de distinguer une panne d'une falsification \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Pourquoi maintenant}
+
+\begin{itemize}
+  \item Le matériel de mesure agricole est devenu accessible : une sonde 4-en-1
+        (humidité, température, pH, conductivité) coûte environ 54\,000 FCFA rendue à Dakar.
+  \item Le satellite est gratuit et régulier : Sentinel-2 fournit le NDVI, Sentinel-1
+        l'humidité de surface, tous les cinq à six jours.
+  \item Le paiement mobile (Wave, Orange Money) rend le décaissement et le remboursement
+        traçables sans infrastructure bancaire locale.
+  \item Les institutions de microfinance et les coopératives cherchent des dossiers
+        \emph{instruits} : la contrainte est la qualité du dossier, pas le volume de demandes.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════
+\newpage
+\section{Description de la solution innovante}
+% ══════════════════════════════════════════════════════════
+
+\subsection{Principe : la preuve naît avec la mesure}
+
+AgriTwin est un \textbf{jumeau numérique de parcelle}. Chaque parcelle déclarée possède un
+contour géographique, une culture, un boîtier scellé et un historique de relevés. Chaque
+relevé est sérialisé de façon canonique, haché en SHA-256 avec l'empreinte du relevé
+précédent, puis chaîné. Toute réécriture casse la chaîne et devient visible.
+
+Cette chaîne alimente un \textbf{Score Vert sur 100}, décomposé en quatre composantes que
+la banque peut discuter une par une. Le score n'est donc pas une note opaque : c'est un
+argumentaire chiffré, avec ses poids, ses seuils et ses limites publiés dans l'application.
+
+\subsection{Le parcours complet, en cinq temps}
+
+\begin{center}
+\begin{tikzpicture}[
+  step/.style={
+    rectangle, rounded corners=5pt, minimum width=11.5cm, minimum height=1.05cm,
+    draw=primary, fill=primary!6, thick,
+    text centered, font=\small\bfseries\color{primary}
+  },
+  arr/.style={-{Stealth[length=5pt]}, thick, accent}
+]
+  \node[step] (a) {1. Déclarer : contour, culture, pièces justificatives};
+  \node[step, below=0.45cm of a] (b) {2. Contrôler : conformité des pièces et du contour};
+  \node[step, below=0.45cm of b] (c) {3. Mesurer : boîtier scellé + Sentinel-1/2, 90 jours};
+  \node[step, below=0.45cm of c] (d) {4. Prouver : chaîne SHA-256, Score Vert décomposé};
+  \node[step, below=0.45cm of d] (e) {5. Décider : portail prêteur, PDF et archive vérifiable};
+
+  \foreach \x/\y in {a/b, b/c, c/d, d/e}
+    \draw[arr] (\x) -- (\y);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Quatre piliers fonctionnels}
+
+\subsubsection{Déclaration et pièces vérifiées}
+
+Parcours en quatre étapes : identité de l'exploitation, localisation et tracé du contour
+sur fond satellite (surface recalculée géométriquement), pièces justificatives, puis
+récapitulatif. Les fichiers sont contrôlés sur leur \textbf{signature binaire réelle} — pas
+sur leur extension ni sur le type MIME déclaré — avec des plafonds de 10\,Mo par pièce,
+25\,Mo par dossier et 4 photos. Un dossier soumis ou certifié repasse automatiquement en
+brouillon dès qu'il est modifié.
+
+\subsubsection{Surveillance continue et alertes bilingues}
+
+Le boîtier fournit humidité à 15 et 35\,cm, températures sol et air, pluie, conductivité
+et pH, état du scellé, accéléromètre, batterie et niveau radio. Huit règles d'alerte
+couvrent l'incohérence sonde/satellite, la rupture de scellé, la chaleur et le stress
+hydrique, la salinité et les signalements phytosanitaires. Les messages existent en
+\textbf{français et en wolof} : le texte wolof est affiché avec sa traduction, et un
+repère sonore accompagne la lecture.
+
+\subsubsection{Score Vert et preuve cryptographique}
+
+Quatre composantes : régularité hydrique (35 points), vigueur végétative (25), santé du sol
+(20), intégrité (20). Une chaîne invalide, un scellé rompu ou un écart satellite supérieur
+à 15 points annulent la composante intégrité et suspendent le décaissement. Le dossier
+complet s'exporte en PDF numéroté, accompagné d'une \textbf{archive ZIP contenant un
+vérificateur autonome} qui recalcule les empreintes en JavaScript pur, sans connexion.
+
+\subsubsection{Trois espaces, un seul jeu de données}
+
+L'exploitant pilote sa parcelle et consent au partage ; la banque consulte le dossier
+seulement après ce consentement ; l'agent de conformité certifie ou rejette les dossiers
+avec note obligatoire, horodatage et identité du relecteur. Aucune vue ne recalcule les
+règles : le moteur de score est unique et partagé.
+
+% ══════════════════════════════════════════════════════════
+\newpage
+\section{Architecture technique}
+% ══════════════════════════════════════════════════════════
+
+\subsection{Chaîne de la preuve}
+
+\begin{center}
+\begin{tikzpicture}[
+  b/.style={
+    rectangle, rounded corners=4pt, minimum width=2.9cm, minimum height=1.7cm,
+    draw=primary, fill=primary!8, thick, align=center,
+    font=\footnotesize\bfseries\color{primary}
+  },
+  h/.style={
+    rectangle, rounded corners=4pt, minimum width=2.9cm, minimum height=1.7cm,
+    draw=techblue, fill=techblue!8, thick, align=center,
+    font=\footnotesize\bfseries\color{techblue}
+  },
+  arr/.style={-{Stealth[length=5pt]}, thick, muted}
+]
+  \node[b] (r1) {Relevé $n-1$\\ {\tiny mesures + scellé}};
+  \node[h, right=0.7cm of r1] (h1) {SHA-256\\ {\tiny hash $n-1$}};
+  \node[b, right=0.7cm of h1] (r2) {Relevé $n$\\ {\tiny mesures + scellé}};
+  \node[h, right=0.7cm of r2] (h2) {SHA-256\\ {\tiny hash $n$}};
+  \node[b, below=1.0cm of h2] (score) {Score Vert\\ {\tiny 4 composantes}};
+  \node[b, left=0.7cm of score] (pdf) {Dossier PDF\\ {\tiny n° AT-…}};
+  \node[b, left=0.7cm of pdf] (bank) {Portail prêteur\\ {\tiny consentement}};
+
+  \draw[arr] (r1) -- (h1);
+  \draw[arr] (h1) -- (r2);
+  \draw[arr] (r2) -- (h2);
+  \draw[arr] (h2) -- (score);
+  \draw[arr] (score) -- (pdf);
+  \draw[arr] (pdf) -- (bank);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Stack du démonstrateur}
+
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}l l X}
+  \toprule
+  \rowcolor{lightbg}
+  Composant & Technologie & Justification \\
+  \midrule
+  Interface & React 18 + TypeScript 5.6 & Typage strict, composants partagés \\
+  \addlinespace
+  Build & Vite 5.4 & Démarrage rapide, sortie statique \\
+  \addlinespace
+  Style & Tailwind CSS 3.4 & Palette, responsive 375\,px, contrastes \\
+  \addlinespace
+  Cartographie & Leaflet + react-leaflet & Fond satellite, contours, sondes \\
+  \addlinespace
+  Géométrie & Turf.js & Surface, centroïde, découpage en zones \\
+  \addlinespace
+  Courbes & Recharts & Télémétrie sur 90 jours \\
+  \addlinespace
+  Preuve & Web Crypto (SHA-256) & Chaînage sans dépendance externe \\
+  \addlinespace
+  Stockage & localStorage + IndexedDB & Structure et pièces, sans serveur \\
+  \addlinespace
+  Export & jsPDF + autotable, ZIP maison & Dossier de crédit et archive vérifiable \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Ce que le prototype ne fait pas}
+
+\begin{itemize}
+  \item Aucune connexion à un boîtier physique : les 90 jours de relevés sont générés par
+        des fonctions déterministes, et les couches Sentinel sont simulées.
+  \item Aucun backend : les comptes et les dossiers restent sur l'appareil ; l'archive ZIP
+        est la seule copie portable.
+  \item La signature prouve l'absence de réécriture locale, pas l'origine physique de la
+        mesure : c'est le rôle du scellé matériel et de la passerelle.
+\end{itemize}
+
+% ══════════════════════════════════════════════════════════
+\section{Éléments justifiant le caractère innovant}
+% ══════════════════════════════════════════════════════════
+
+\begin{enumerate}
+  \item \textbf{La preuve est le produit, pas un rapport.} Les plateformes agricoles
+        existantes affichent des courbes ; AgriTwin produit un objet vérifiable : chaîne
+        de hachage, score décomposé, PDF numéroté, vérificateur hors ligne. La banque ne
+        fait pas confiance à l'écran : elle recalcule.
+
+  \item \textbf{La fraude est traitée comme un cas nominal.} Le rapprochement
+        sonde / satellite (écart supérieur à 15 points), le scellé et l'accéléromètre sont
+        des entrées du score, pas des alertes décoratives. Une fraude ne dégrade pas la
+        note : elle annule la composante intégrité et gèle le décaissement.
+
+  \item \textbf{Le score est auditable par conception.} Poids, seuils, formules et limites
+        sont publiés dans l'application et importés du même moteur que le calcul : il n'y a
+        pas deux versions de la vérité, une pour l'écran et une pour le règlement.
+
+  \item \textbf{Le coût marginal de la donnée est faible.} Le boîtier est un investissement
+        unique (≈ 300\,000 FCFA pour une parcelle de 1,5\,ha), le satellite est gratuit,
+        et l'application ne dépend d'aucun service payant. Le modèle économique ne repose
+        pas sur un abonnement de données coûteux.
+
+  \item \textbf{Le consentement est un mécanisme, pas une case.} Sans consentement explicite
+        de l'exploitant, le portail prêteur est verrouillé ; le partage est révocable et
+        tracé, conformément à la loi 2008-12 sur les données personnelles.
+
+  \item \textbf{L'inclusion linguistique est intégrée.} Alertes, questions rapides et
+        restitutions existent en français et en wolof, avec un repère sonore, pour un
+        utilisateur qui lit difficilement le français technique.
+\end{enumerate}
+
+\begin{mdframed}[style=neutral]
+\textbf{Positionnement face aux approches existantes.} Les stations météo et les
+plateformes d'irrigation automatisée mesurent et pilotent ; elles ne produisent pas de
+preuve bancaire et coûtent de 650\,000 FCFA à plus de 2\,M FCFA installées. Les
+applications de conseil agricole conseillent sans historiser de façon opposable. AgriTwin
+ne vend ni la mesure ni l'automatisation : il vend \textbf{la convertibilité d'une parcelle
+en dossier de crédit}.
+\end{mdframed}
+
+% ══════════════════════════════════════════════════════════
+\newpage
+\section{Niveau de développement du projet}
+% ══════════════════════════════════════════════════════════
+
+\subsection{Un prototype fonctionnel, pas une maquette}
+
+Le démonstrateur est une application monopage complète, déployable en statique, qui
+implémente l'ensemble du parcours :
+
+\begin{itemize}
+  \item authentification locale avec trois rôles et trois comptes de démonstration ;
+  \item déclaration de parcelle en quatre étapes, tracé du contour, contrôle binaire des
+        pièces et stockage IndexedDB ;
+  \item carte satellite, trois calques (zones, NDVI, radar), sondes cliquables et curseur
+        temporel sur 90 jours ;
+  \item télémétrie, journal agronomique, bilan azoté, assistant vocal et alertes bilingues ;
+  \item simulateur de rendement à trois leviers, avec marge nette en FCFA ;
+  \item moteur de Score Vert à quatre composantes, verdict de crédit et assurance indicielle ;
+  \item chaîne SHA-256 vérifiable, journal de blocs, PDF de crédit, archive ZIP et
+        vérificateur autonome ;
+  \item portail financeur verrouillé par le consentement, back-office de conformité ;
+  \item simulateur d'injection (relevé normal, chaleur, fraude, arrachement) et démo guidée
+        en neuf étapes ;
+  \item mise en page vérifiée de 320 à 375\,px, navigation clavier, libellés ARIA.
+\end{itemize}
+
+\subsection{État de maturité}
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}l X}
+  \toprule
+  \rowcolor{lightbg}
+  Dimension & État au dépôt \\
+  \midrule
+  Logiciel & Fonctionnel, testé manuellement, build de production reproductible \\
+  \addlinespace
+  Données & Simulées de façon déterministe (90 jours, 3 zones, 3 parcelles de démonstration) \\
+  \addlinespace
+  Matériel & Spécifié et chiffré (4 configurations de kits), non encore assemblé \\
+  \addlinespace
+  Terrain & Aucun pilote réel à ce stade : c'est la prochaine étape \\
+  \addlinespace
+  Niveau TRL & 4 — validation en environnement de laboratoire / démonstrateur \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{mdframed}[style=accent]
+\textbf{Honnêteté requise devant le jury.} Le prototype ne prétend ni mesurer un sol réel,
+ni accorder un crédit. Il démontre que la chaîne « mesure → preuve → score → décision »
+fonctionne de bout en bout, et que chaque maillon est vérifiable indépendamment.
+\end{mdframed}
+
+% ══════════════════════════════════════════════════════════
+\section{Perspectives d'application et de valorisation}
+% ══════════════════════════════════════════════════════════
+
+\subsection{Segments cibles}
+
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}l X l}
+  \toprule
+  \rowcolor{lightbg}
+  Segment & Besoin principal & Offre \\
+  \midrule
+  Petit producteur (0,5–2\,ha) & Prouver sa parcelle pour un crédit d'intrants & Kit A + plateforme \\
+  \addlinespace
+  Exploitation moyenne (2–10\,ha) & Suivre trois zones, justifier les rendements & Kit B + tableau de bord \\
+  \addlinespace
+  Coopérative (20–100\,ha) & Dossier collectif, passerelle mutualisée & Kit C + portail coopérative \\
+  \addlinespace
+  IMF / banque & Instruire à distance, réduire le risque & Licence portail + API \\
+  \addlinespace
+  Assureur indiciel & Déclencher une indemnisation sur des données vérifiables & Licence + connecteur \\
+  \addlinespace
+  Recherche / agro-industrie & Métrologie de référence, essais & Kit D + export de données \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Modèle de valorisation}
+
+\begin{tabularx}{\linewidth}{>{\bfseries}l X >{\color{mygreen}\small\itshape}r}
+  \toprule
+  \rowcolor{lightbg}
+  Axe & Description & Modèle \\
+  \midrule
+  \multicolumn{3}{l}{\textbf{\textcolor{primary}{Matériel}}} \\
+  \addlinespace
+  Kit A / B / C & Boîtier scellé, sondes, énergie, pose & 300\,000 à 2\,100\,000 FCFA \\
+  Leasing (HaaS) & Apport 30\,\%, puis 24 à 36 mois & 15\,000 à 25\,000 FCFA/mois \\
+  \addlinespace\midrule\addlinespace
+  \multicolumn{3}{l}{\textbf{\textcolor{primary}{Plateforme}}} \\
+  \addlinespace
+  Abonnement exploitation & Score, alertes, PDF, archive & 5\,000 à 15\,000 FCFA/mois \\
+  Licence institution & Portail prêteur, API, dossiers illimités & Contrat annuel \\
+  Intégration coopérative & Formation, support, hébergement & Forfait par coopérative \\
+  \bottomrule
+\end{tabularx}
+
+\subsection{Feuille de route}
+
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}l l X}
+  \toprule
+  \rowcolor{lightbg}
+  Phase & Horizon & Objectifs \\
+  \midrule
+  Phase 1 & 0–3 mois & Assembler 3 kits A, valider la sonde 4-en-1, première parcelle pilote à Bambey \\
+  \addlinespace
+  Phase 2 & 3–9 mois & Backend et synchronisation, 10 parcelles, dossier réel présenté à une IMF \\
+  \addlinespace
+  Phase 3 & 9–18 mois & Passerelle coopérative, 100 parcelles, connecteur assureur indiciel \\
+  \addlinespace
+  Phase 4 & 18 mois+ & Extension Thiès / Mbour / Saint-Louis, API opérateurs \\
+  \bottomrule
+\end{tabularx}
+
+% ══════════════════════════════════════════════════════════
+\newpage
+\section{Impacts économiques, sociaux et environnementaux attendus}
+% ══════════════════════════════════════════════════════════
+
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}p{3.1cm} X X}
+  \toprule
+  \rowcolor{lightbg}
+  Dimension & Mécanisme & Indicateur de suivi \\
+  \midrule
+  \textbf{Économique} &
+  Dossier instruisible à distance : moins de déplacements d'experts, décision plus rapide,
+  crédit d'intrants mieux calibré. &
+  Délai d'instruction (jours), coût de vérification par dossier, taux de dossiers complets \\
+  \addlinespace
+  \textbf{Économique} &
+  Le score décomposé permet de négocier une bonification ou une assurance adaptée au risque réel. &
+  Taux effectif obtenu, part des dossiers à score A \\
+  \addlinespace
+  \textbf{Social} &
+  Inclusion des producteurs sans historique bancaire, y compris les femmes des coopératives,
+  grâce à un dossier construit sur des faits mesurés. &
+  Nombre de primo-emprunteurs, part de femmes, rétention à 12 mois \\
+  \addlinespace
+  \textbf{Social} &
+  Alertes et restitutions en wolof, navigation mobile : l'outil reste utilisable par un
+  producteur peu lettré en français technique. &
+  Taux d'usage effectif des alertes, tests d'utilisabilité \\
+  \addlinespace
+  \textbf{Environnemental} &
+  Irrigation raisonnée sur la fenêtre 20–35\,\% d'humidité et azote ajusté au besoin de la
+  culture : moins de gaspillage d'eau et d'engrais. &
+  Volume d'eau par hectare, kg N/ha, nombre d'alertes de stress évitées \\
+  \addlinespace
+  \textbf{Environnemental} &
+  Preuve partagée numériquement : moins de tournées de contrôle et de dossiers papier. &
+  Déplacements évités, volume de pièces dématérialisées \\
+  \addlinespace
+  \textbf{Institutionnel} &
+  Journal opposable et consentement tracé : la décision devient défendable en cas de
+  contestation ou d'audit. &
+  Nombre de dossiers audités sans rupture de chaîne \\
+  \bottomrule
+\end{tabularx}
+
+\vspace{0.5cm}
+
+\begin{mdframed}[style=primary]
+\textbf{Prudence méthodologique.} Aucun de ces impacts n'est mesuré à ce jour : le
+prototype n'a pas été déployé en champ. Les valeurs seront établies lors du pilote par
+comparaison avant / après sur un échantillon témoin, et publiées telles quelles, y compris
+si elles sont inférieures aux attentes.
+\end{mdframed}
+
+% ══════════════════════════════════════════════════════════
+\section{Risques, limites et éthique}
+% ══════════════════════════════════════════════════════════
+
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}p{3.4cm} X X}
+  \toprule
+  \rowcolor{lightbg}
+  Risque & Description & Réduction \\
+  \midrule
+  Métrologie & Sondes bas coût : pH et conductivité indicatifs, dérive possible. & Comparaison contre une sonde de référence avant toute promesse de précision ; mention explicite dans l'interface. \\
+  \addlinespace
+  Connectivité & Couverture LoRa ou data insuffisante en zone rurale. & Relevés en lot, cache local, passerelle mutualisée, mode hors ligne assumé. \\
+  \addlinespace
+  Sécurité & Le stockage navigateur est modifiable par un utilisateur averti. & Le prototype est un démonstrateur ; la version pilote déplace la preuve côté serveur et conserve le vérificateur indépendant. \\
+  \addlinespace
+  Données personnelles & Identité, pièces, localisation de la parcelle. & Consentement explicite, partage révocable, référence à la loi 2008-12 (CDP), minimisation des données. \\
+  \addlinespace
+  Adoption & Coût du kit et fracture numérique. & Leasing, subvention coopérative, interface en wolof, formation de deux heures à la pose. \\
+  \addlinespace
+  Responsabilité & Un score ne doit pas se substituer à la décision de crédit. & Le score est un \emph{avis documenté} : la banque reste décideur, le motif de refus est explicite. \\
+  \bottomrule
+\end{tabularx}
+
+% ══════════════════════════════════════════════════════════
+\section{Conclusion}
+% ══════════════════════════════════════════════════════════
+
+AgriTwin part d'un constat simple : une parcelle bien conduite ne vaut rien pour une banque
+tant que rien ne le prouve. Plutôt que d'ajouter une énième application de conseil, le
+projet construit la \textbf{preuve} elle-même — mesure scellée, empreinte chaînée, score
+décomposé, dossier vérifiable hors ligne — et la rend lisible par les trois parties
+concernées : le producteur, le financeur, le contrôleur.
+
+Le prototype démontre cette chaîne de bout en bout, avec ses limites assumées : données
+simulées, matériel spécifié mais non assemblé, aucun pilote terrain. La prochaine étape est
+donc claire et vérifiable : trois kits, dix parcelles, un dossier réel présenté à une
+institution de microfinance, et des indicateurs publiés sans embellissement.
+
+\vspace{0.4cm}
+
+Face aux enjeux du financement de l'agriculture familiale sénégalaise, AgriTwin incarne ce
+que l'ingénierie peut apporter de plus utile : \textbf{une preuve simple à produire,
+difficile à falsifier, et immédiatement utilisable par ceux qui décident}.
+
+\vspace{1.2cm}
+
+\begin{center}
+  \textcolor{rule}{\rule{4cm}{0.4pt}}
+  \quad\textcolor{accent}{\large$\bullet$}\quad
+  \textcolor{rule}{\rule{4cm}{0.4pt}}
+
+  \vspace{0.5cm}
+  {\Large\textbf{\textcolor{primary}{AGRITWIN}}}\\[5pt]
+  \textit{\textcolor{muted}{Une parcelle, une preuve, un score.}}\\[8pt]
+  \small\textcolor{muted}{Prix de l'Innovation 2026 \quad—\quad Polytech Innovation Day \quad—\quad EPT Thiès}
+\end{center}
+
+% ══════════════════════════════════════════════════════════
+\newpage
+\appendix
+\section{Méthodologie du Score Vert}
+% ══════════════════════════════════════════════════════════
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}l c X}
+  \toprule
+  \rowcolor{lightbg}
+  Composante & Poids & Calcul \\
+  \midrule
+  Régularité hydrique & 35 & Part des jours où l'humidité à 15\,cm reste dans la fenêtre 20–35\,\% \\
+  \addlinespace
+  Vigueur végétative & 25 & NDVI multiplié par 32, plafonné à 25 \\
+  \addlinespace
+  Santé du sol & 20 & 20 points si EC $\leq$ 1,4\,dS/m et pH entre 6,0 et 7,5 ; 14 si EC $\leq$ 2,0 ; sinon 7 \\
+  \addlinespace
+  Intégrité & 20 & 20 points si chaîne valide, scellé intact et écart satellite $\leq$ 15 ; sinon 0 \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+Seuils de décision : \textbf{75 et plus} profil A (éligible), \textbf{50 à 74} profil B
+(suivi coopératif), \textbf{moins de 50} profil C. Une fraude, une chaîne invalide ou un
+dossier gelé suspend le décaissement, quel que soit le score affiché.
+
+\section{Composition et coût des kits}
+% ══════════════════════════════════════════════════════════
+
+\begin{center}
+\begin{tabularx}{\linewidth}{>{\bfseries\color{primary}}l c X r}
+  \toprule
+  \rowcolor{lightbg}
+  Kit & Surface & Composition principale & Coût total \\
+  \midrule
+  A — Essentiel & 0,5–2\,ha & 2 sondes 4-en-1, nœud LoRa, boîtier IP67, 20\,Wc, pose & $\approx$ 300\,000 FCFA \\
+  \addlinespace
+  B — Trois zones & 2–10\,ha & 3 sondes, boîtier 255\,mm, 40\,Wc, bus RS485 & $\approx$ 450\,000 FCFA \\
+  \addlinespace
+  C — Coopérative & 20–100\,ha & 3 kits B, passerelle extérieure, station météo & $\approx$ 2\,100\,000 FCFA \\
+  \addlinespace
+  D — Recherche & 1–5\,ha & Sondes de référence, passerelle, étalonnage & $\approx$ 1\,300\,000 FCFA \\
+  \bottomrule
+\end{tabularx}
+\end{center}
+
+Prix indicatifs constatés en novembre 2026, matériel rendu Dakar, pose comprise ; à
+remplacer par des devis fournisseurs avant tout engagement. Coût de possession sur trois
+ans pour le kit A : environ 620\,000 FCFA, abonnement et maintenance inclus.
+
+\section{Protocole de vérification indépendante}
+% ══════════════════════════════════════════════════════════
+
+L'archive remise à la banque contient le PDF du dossier, un fichier \texttt{preuve.json}
+(format \texttt{agritwin-dossier/1}) et un vérificateur HTML autonome. Ce vérificateur
+réalise six contrôles, sans réseau et sans bibliothèque : format du dossier, chaîne des
+blocs, empreinte globale, recalcul du Score Vert et de ses quatre composantes, empreinte du
+PDF déposé, cohérence de l'identité. Toute altération est localisée : le bloc de rupture et
+l'écart entre score déclaré et score recalculé sont affichés.
+
+\section{Check-list de dépôt}
+% ══════════════════════════════════════════════════════════
+
+\begin{itemize}
+  \item Renseigner la page de garde : noms, formations, encadrant, contact.
+  \item Insérer le logo à la place du cadre vide, puis vérifier la mise en page.
+  \item Remplacer l'URL du prototype par l'adresse publique réelle.
+  \item Joindre les supports autorisés : photos de parcelle et de boîtier, schéma
+        d'architecture, capture mobile, vidéo de démonstration.
+  \item Relire les chiffres de coût et les dater (« prix constatés en novembre 2026 »).
+  \item Vérifier que chaque affirmation sur les impacts est présentée comme une hypothèse
+        à mesurer, jamais comme un résultat acquis.
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,43 @@
+{
+  "name": "agritwin-prototype",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:demo": "node ./node_modules/vite/bin/vite.js --config demo/vite.config.ts",
+    "build": "node ./node_modules/typescript/bin/tsc -b && node ./node_modules/vite/bin/vite.js build",
+    "build:demo": "node ./node_modules/vite/bin/vite.js build --config demo/vite.config.ts",
+    "vercel-build": "npm run build:demo",
+    "preview": "vite preview",
+    "typecheck": "node ./node_modules/typescript/bin/tsc --noEmit -p tsconfig.app.json",
+    "typecheck:demo": "node ./node_modules/typescript/bin/tsc --noEmit -p demo/tsconfig.json"
+  },
+  "allowScripts": {
+    "esbuild": true,
+    "core-js": false
+  },
+  "dependencies": {
+    "@turf/turf": "^7.1.0",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
+    "leaflet": "^1.9.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
+    "recharts": "^2.13.3",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.12",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.170.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}

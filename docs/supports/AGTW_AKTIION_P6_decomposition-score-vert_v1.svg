@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="p6t p6d">
+  <title id="p6t">P6 — Décomposition du Score Vert AgriTwin</title>
+  <desc id="p6d">Barre de 100 points répartie en régularité hydrique 35, vigueur végétative 25, santé du sol 20 et intégrité 20. Seuils de crédit à 50 et 75 points, puis règle de calcul de chaque composante.</desc>
+
+  <defs>
+    <clipPath id="p6-bar"><rect x="100" y="205" width="1400" height="76" rx="12"/></clipPath>
+  </defs>
+
+  <rect width="1600" height="900" fill="#f8fafc"/>
+
+  <!-- En-tête -->
+  <text x="100" y="66" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12.5" font-weight="700" letter-spacing="2.2" fill="#15803d">AGTW · SUPPORT P6</text>
+  <text x="100" y="118" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="46" font-weight="600" fill="#0f172a">Comment se construit le Score Vert</text>
+  <text x="100" y="152" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="17.5" fill="#5b6a7d">100 points, quatre composantes, trois profils de crédit.</text>
+  <line x1="100" y1="180" x2="1500" y2="180" stroke="#e3e9f1" stroke-width="1"/>
+
+  <!-- Barre 100 points -->
+  <g clip-path="url(#p6-bar)">
+    <rect x="100" y="205" width="490" height="76" fill="#14532d"/>
+    <rect x="590" y="205" width="350" height="76" fill="#15803d"/>
+    <rect x="940" y="205" width="280" height="76" fill="#0284c7"/>
+    <rect x="1220" y="205" width="280" height="76" fill="#0f172a"/>
+  </g>
+  <g font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+    <text x="122" y="247" font-size="30" font-weight="700" fill="#ffffff">35</text>
+    <text x="122" y="268" font-size="11" font-weight="700" letter-spacing="0.9" fill="#dcfce7">RÉGULARITÉ HYDRIQUE</text>
+
+    <text x="612" y="247" font-size="30" font-weight="700" fill="#ffffff">25</text>
+    <text x="612" y="268" font-size="11" font-weight="700" letter-spacing="0.9" fill="#dcfce7">VIGUEUR VÉGÉTATIVE</text>
+
+    <text x="962" y="247" font-size="30" font-weight="700" fill="#ffffff">20</text>
+    <text x="962" y="268" font-size="11" font-weight="700" letter-spacing="0.9" fill="#e0f2fe">SANTÉ DU SOL</text>
+
+    <text x="1242" y="247" font-size="30" font-weight="700" fill="#ffffff">20</text>
+    <text x="1242" y="268" font-size="11" font-weight="700" letter-spacing="0.9" fill="#cbd5e1">INTÉGRITÉ</text>
+  </g>
+
+  <!-- Seuils -->
+  <g stroke="#0f172a" stroke-width="1.2" stroke-dasharray="4 4">
+    <line x1="800" y1="281" x2="800" y2="300"/>
+    <line x1="1150" y1="281" x2="1150" y2="300"/>
+  </g>
+  <g font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="11.5" fill="#5b6a7d" text-anchor="middle">
+    <text x="800" y="320">50 · profil B — suivi coopératif</text>
+    <text x="1150" y="320">75 · profil A — éligible</text>
+  </g>
+
+  <!-- Cartes de composantes -->
+  <g>
+    <rect x="100" y="350" width="330" height="290" rx="16" fill="#ffffff" stroke="#e6edf4"/>
+    <text x="124" y="386" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.4" fill="#5b6a7d">COMPOSANTE 1</text>
+    <text x="406" y="392" text-anchor="end" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="32" font-weight="600" fill="#14532d">35</text>
+    <text x="124" y="422" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="20" font-weight="600" fill="#0f172a">Régularité hydrique</text>
+    <line x1="124" y1="440" x2="406" y2="440" stroke="#eef3f8" stroke-width="1"/>
+    <text x="124" y="470" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Part des jours où l'humidité</text>
+    <text x="124" y="494" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">à 15 cm reste dans la</text>
+    <text x="124" y="518" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">fenêtre 20–35 %.</text>
+    <text x="124" y="606" font-family="IBM Plex Mono, Consolas, monospace" font-size="11" fill="#5b6a7d">90 jours glissants</text>
+  </g>
+
+  <g>
+    <rect x="456" y="350" width="330" height="290" rx="16" fill="#ffffff" stroke="#e6edf4"/>
+    <text x="480" y="386" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.4" fill="#5b6a7d">COMPOSANTE 2</text>
+    <text x="762" y="392" text-anchor="end" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="32" font-weight="600" fill="#15803d">25</text>
+    <text x="480" y="422" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="20" font-weight="600" fill="#0f172a">Vigueur végétative</text>
+    <line x1="480" y1="440" x2="762" y2="440" stroke="#eef3f8" stroke-width="1"/>
+    <text x="480" y="470" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">NDVI Sentinel-2 × 32,</text>
+    <text x="480" y="494" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">plafonné à 25 points.</text>
+    <text x="480" y="518" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">Aucun NDVI, aucun point.</text>
+    <text x="480" y="606" font-family="IBM Plex Mono, Consolas, monospace" font-size="11" fill="#5b6a7d">tuiles 10 m · revisite 5 j</text>
+  </g>
+
+  <g>
+    <rect x="812" y="350" width="330" height="290" rx="16" fill="#ffffff" stroke="#e6edf4"/>
+    <text x="836" y="386" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.4" fill="#5b6a7d">COMPOSANTE 3</text>
+    <text x="1118" y="392" text-anchor="end" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="32" font-weight="600" fill="#0284c7">20</text>
+    <text x="836" y="422" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="20" font-weight="600" fill="#0f172a">Santé du sol</text>
+    <line x1="836" y1="440" x2="1118" y2="440" stroke="#eef3f8" stroke-width="1"/>
+    <text x="836" y="470" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">20 pts si EC ≤ 1,4 et</text>
+    <text x="836" y="494" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">pH 6,0–7,5 ; 14 si EC ≤ 2,0 ;</text>
+    <text x="836" y="518" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">sinon 7.</text>
+    <text x="836" y="606" font-family="IBM Plex Mono, Consolas, monospace" font-size="11" fill="#5b6a7d">sonde 4-en-1 · 2 profondeurs</text>
+  </g>
+
+  <g>
+    <rect x="1168" y="350" width="332" height="290" rx="16" fill="#ffffff" stroke="#e6edf4"/>
+    <text x="1192" y="386" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="10.5" font-weight="700" letter-spacing="1.4" fill="#5b6a7d">COMPOSANTE 4</text>
+    <text x="1476" y="392" text-anchor="end" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="32" font-weight="600" fill="#0f172a">20</text>
+    <text x="1192" y="422" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="20" font-weight="600" fill="#0f172a">Intégrité</text>
+    <line x1="1192" y1="440" x2="1476" y2="440" stroke="#eef3f8" stroke-width="1"/>
+    <text x="1192" y="470" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">20 si chaîne valide, scellé</text>
+    <text x="1192" y="494" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">intact et écart satellite</text>
+    <text x="1192" y="518" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="13" fill="#475569">≤ 15 pts ; sinon 0.</text>
+    <text x="1192" y="606" font-family="IBM Plex Mono, Consolas, monospace" font-size="11" fill="#5b6a7d">SHA-256 + scellé + accéléro.</text>
+  </g>
+
+  <!-- Profils -->
+  <g>
+    <rect x="100" y="676" width="460" height="88" rx="14" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <circle cx="140" cy="720" r="20" fill="#ffffff" stroke="#86efac"/>
+    <text x="140" y="727" text-anchor="middle" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="20" font-weight="600" fill="#14532d">A</text>
+    <text x="176" y="712" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#14532d">Profil A · score ≥ 75</text>
+    <text x="176" y="736" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#475569">Éligible : dossier bancable</text>
+
+    <rect x="570" y="676" width="460" height="88" rx="14" fill="#ffffff" stroke="#cbd8e6"/>
+    <circle cx="610" cy="720" r="20" fill="#f8fafc" stroke="#cbd8e6"/>
+    <text x="610" y="727" text-anchor="middle" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="20" font-weight="600" fill="#0f172a">B</text>
+    <text x="646" y="712" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#0f172a">Profil B · score ≥ 50</text>
+    <text x="646" y="736" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#475569">Suivi coopératif, crédit encadré</text>
+
+    <rect x="1040" y="676" width="460" height="88" rx="14" fill="#ffffff" stroke="#e3e9f1"/>
+    <circle cx="1080" cy="720" r="20" fill="#f8fafc" stroke="#cbd8e6"/>
+    <text x="1080" y="727" text-anchor="middle" font-family="Newsreader, Georgia, 'Times New Roman', serif" font-size="20" font-weight="600" fill="#5b6a7d">C</text>
+    <text x="1116" y="712" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#334155">Profil C · score &lt; 50</text>
+    <text x="1116" y="736" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12.5" fill="#5b6a7d">Non éligible : plan de correction</text>
+  </g>
+
+  <!-- Pied -->
+  <line x1="100" y1="812" x2="1500" y2="812" stroke="#e3e9f1" stroke-width="1"/>
+  <text x="100" y="842" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#94a3b8">AgriTwin · AKTIION 2026 — École Polytechnique de Thiès</text>
+  <text x="1500" y="842" text-anchor="end" font-family="Public Sans, Segoe UI, Roboto, Helvetica, Arial, sans-serif" font-size="12" fill="#94a3b8">P6 — Score Vert · 35 + 25 + 20 + 20 = 100</text>
+</svg>

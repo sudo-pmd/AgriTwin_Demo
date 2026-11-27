@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>AgriTwin — Kits et équipements, prix réels (AKTIION 2026)</title>
+<style>
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { size: A4; margin: 0; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #0f172a; font-size: 9pt; line-height: 1.34;
+    background: #f8fafc;
+  }
+  .page {
+    box-sizing: border-box; width: 210mm; min-height: 297mm;
+    padding: 12mm 13mm 9mm; background: #f8fafc;
+    page-break-after: always; display: flex; flex-direction: column;
+    position: relative;
+  }
+  .page:last-of-type { page-break-after: auto; }
+
+  /* ---------- couverture ---------- */
+  .cover { padding: 0; background: #14532d; color: #f8fafc; justify-content: space-between; }
+  .cover-top { padding: 22mm 18mm 0; }
+  .cover-mark { display: flex; align-items: center; gap: 8px; font-size: 8.5pt; letter-spacing: .18em; text-transform: uppercase; color: #bbf7d0; }
+  .cover-mark span.dot { width: 25px; height: 3px; background: #4ade80; display: inline-block; }
+  .cover h1 { font-size: 34pt; line-height: 1.04; margin: 0 0 6mm; font-weight: 700; letter-spacing: -0.02em; color: #ffffff; }
+  .cover h2 { font-size: 13pt; font-weight: 400; color: #dcfce7; margin: 0 0 14mm; max-width: 130mm; line-height: 1.45; }
+  .cover-kicker { font-size: 9pt; text-transform: uppercase; letter-spacing: .14em; color: #86efac; margin-bottom: 5mm; }
+  .cover-price { display: flex; gap: 6mm; margin-bottom: 12mm; }
+  .cover-price div { border-top: 2px solid #4ade80; padding-top: 3mm; min-width: 38mm; }
+  .cover-price b { display: block; font-size: 16pt; color: #fff; }
+  .cover-price small { font-size: 7.5pt; color: #bbf7d0; text-transform: uppercase; letter-spacing: .1em; }
+  .cover-foot { background: #0f172a; padding: 9mm 18mm; font-size: 8pt; color: #cbd5e1; display: flex; justify-content: space-between; gap: 10mm; }
+  .cover-foot b { color: #fff; display: block; font-size: 9pt; margin-bottom: 1mm; }
+
+  /* ---------- entêtes ---------- */
+  .pg-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #14532d; padding-bottom: 2mm; margin-bottom: 5mm; }
+  .pg-head .t { font-size: 8pt; text-transform: uppercase; letter-spacing: .16em; color: #14532d; font-weight: 700; }
+  .pg-head .n { font-size: 7.5pt; color: #64748b; }
+  .pg-foot { margin-top: auto; padding-top: 3mm; border-top: 1px solid #cbd5e1; font-size: 7pt; color: #64748b; display: flex; justify-content: space-between; }
+
+  h2.sec { font-size: 16pt; margin: 0 0 1.2mm; color: #14532d; letter-spacing: -0.01em; }
+  h3 { font-size: 10pt; margin: 3.6mm 0 1.4mm; color: #0f172a; }
+  h4 { font-size: 8.4pt; margin: 2.4mm 0 1.1mm; color: #15803d; text-transform: uppercase; letter-spacing: .07em; }
+  p { margin: 0 0 1.9mm; }
+  .lead { font-size: 9.6pt; color: #334155; margin-bottom: 2.6mm; }
+  ul { margin: 0 0 2.5mm; padding-left: 5mm; }
+  li { margin-bottom: 1.3mm; }
+  strong { color: #0f172a; }
+  .small { font-size: 7.8pt; color: #475569; }
+  .mono { font-variant-numeric: tabular-nums; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 7.9pt; margin: 1.1mm 0 2.1mm; }
+  th { background: #14532d; color: #fff; text-align: left; padding: 1.2mm 1.6mm; font-weight: 600; font-size: 7.4pt; letter-spacing: .02em; }
+  td { padding: 1mm 1.6mm; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+  tbody tr:nth-child(even) td { background: #eef4f0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.total td { background: #dcfce7 !important; font-weight: 700; border-top: 1.5px solid #15803d; border-bottom: 1.5px solid #15803d; }
+  tr.sub td { background: #f1f5f9 !important; font-weight: 600; font-style: italic; }
+
+  .box { border-left: 3px solid #15803d; background: #ffffff; padding: 2.2mm 3.2mm; margin: 1.6mm 0 2.6mm; font-size: 8.1pt; }
+  .box.warn { border-left-color: #b45309; background: #fffbeb; }
+  .box.blue { border-left-color: #0284c7; background: #f0f9ff; }
+  .box h5 { margin: 0 0 1.2mm; font-size: 8.2pt; text-transform: uppercase; letter-spacing: .08em; color: #14532d; }
+  .box.warn h5 { color: #92400e; }
+  .box.blue h5 { color: #0369a1; }
+
+  .grid2 { display: flex; gap: 6mm; }
+  .grid2 > * { flex: 1; }
+  .kpi { display: flex; gap: 3mm; margin: 1.4mm 0 2.6mm; }
+  .kpi div { flex: 1; background: #fff; border-top: 3px solid #15803d; padding: 1.8mm 2.6mm; }
+  .kpi b { display: block; font-size: 13pt; color: #14532d; }
+  .kpi small { font-size: 7.2pt; color: #64748b; text-transform: uppercase; letter-spacing: .06em; }
+
+  .tag { display: inline-block; font-size: 7pt; padding: .6mm 1.6mm; border-radius: 2px; background: #dcfce7; color: #14532d; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+  .tag.grey { background: #e2e8f0; color: #475569; }
+  .tag.blue { background: #e0f2fe; color: #0369a1; }
+
+  .src { font-size: 6.9pt; color: #64748b; word-break: break-all; }
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li { display: flex; align-items: baseline; gap: 2mm; padding: 1.3mm 0; border-bottom: 1px dotted #cbd5e1; font-size: 9pt; }
+  .toc li b { color: #14532d; min-width: 9mm; }
+  .toc li span.p { margin-left: auto; color: #64748b; font-size: 8pt; }
+</style>
+</head>
+<body>
+
+<!-- ============ COUVERTURE ============ -->
+<section class="page cover">
+  <div class="cover-top">
+    <div class="cover-mark"><span class="dot"></span> AgriTwin · AKTIION 2026 · EPT Thiès</div>
+    <h1>Kits et<br>équipements</h1>
+    <h2>Ce que nous devons proposer, à quel prix réel, et pour quel segment de producteur.</h2>
+    <div class="cover-kicker">Recherche matérielle et chiffrage</div>
+    <div class="cover-price">
+      <div><b>4 kits</b><small>Essentiel · Zones · Coopérative · Recherche</small></div>
+      <div><b>≈ 300 000</b><small>FCFA d'entrée de gamme</small></div>
+      <div><b>16 réf.</b><small>prix publics vérifiés</small></div>
+    </div>
+  </div>
+  <div class="cover-foot">
+    <div><b>Version 1.0 — 24 novembre 2026</b>Prix relevés sur catalogues publics, convertis au taux du jour.</div>
+    <div><b>Document de candidature</b>Pièce jointe au dossier de présentation du projet.</div>
+  </div>
+</section>
+
+<!-- ============ SOMMAIRE + SYNTHÈSE ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">Sommaire et synthèse</div><div class="n">AgriTwin · kits &amp; équipements</div></div>
+  <h2 class="sec">Ce que le dossier doit démontrer</h2>
+  <p class="lead">Un jury ne finance pas des courbes : il finance un dispositif qu'on peut acheter, poser, entretenir et dont le prix se défend ligne par ligne. Cette note établit la nomenclature matérielle d'AgriTwin, les prix réellement pratiqués aujourd'hui et quatre configurations tarifées.</p>
+
+  <ul class="toc">
+    <li><b>1</b> Contrainte produit : ce que le Score Vert exige du matériel <span class="p">p. 3</span></li>
+    <li><b>2</b> Méthode de chiffrage et taux de conversion <span class="p">p. 3</span></li>
+    <li><b>3</b> Catalogue des capteurs — prix sourcés <span class="p">p. 4</span></li>
+    <li><b>4</b> Acquisition, transmission, énergie, connectivité <span class="p">p. 5</span></li>
+    <li><b>5</b> Kit A — Essentiel · 1 parcelle <span class="p">p. 6</span></li>
+    <li><b>6</b> Kit B — Trois zones · 2 à 10 ha <span class="p">p. 7</span></li>
+    <li><b>7</b> Kit C — Coopérative · 3 parcelles + passerelle <span class="p">p. 8</span></li>
+    <li><b>8</b> Kit D — Recherche · métrologie de référence <span class="p">p. 9</span></li>
+    <li><b>9</b> Options et montées en gamme <span class="p">p. 10</span></li>
+    <li><b>10</b> Coût par hectare, segments et modèles économiques <span class="p">p. 11</span></li>
+    <li><b>11</b> Coûts récurrents et coût de possession sur 3 ans <span class="p">p. 12</span></li>
+    <li><b>12</b> Limites du chiffrage et sources <span class="p">p. 13–14</span></li>
+  </ul>
+
+  <h3>Les quatre kits en une ligne</h3>
+  <table>
+    <thead><tr><th>Kit</th><th>Cible</th><th>Surface</th><th>Contenu clé</th><th class="num">Total</th><th class="num">FCFA/ha</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A — Essentiel</strong></td><td>Petit producteur</td><td>0,5–2 ha</td><td>2 sondes 4-en-1, 1 boîtier scellé, énergie solaire</td><td class="num">300 000</td><td class="num">200 000</td></tr>
+      <tr><td><strong>B — Trois zones</strong></td><td>Exploitation moyenne</td><td>2–10 ha</td><td>3 sondes, boîtier IP67, mât, 40 Wc</td><td class="num">450 000</td><td class="num">90 000</td></tr>
+      <tr><td><strong>C — Coopérative</strong></td><td>Coopérative / agrégateur</td><td>20–100 ha</td><td>3 × kit B + passerelle extérieure + station météo</td><td class="num">2 086 000</td><td class="num">52 000</td></tr>
+      <tr><td><strong>D — Recherche</strong></td><td>Station de référence</td><td>1–5 ha</td><td>2 × TEROS 12, passerelle, station, étalonnage</td><td class="num">1 296 000</td><td class="num">—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="kpi">
+    <div><b>54 000 FCFA</b><small>Sonde 4-en-1 retenue</small></div>
+    <div><b>214 000 FCFA</b><small>Passerelle extérieure</small></div>
+    <div><b>2 000 FCFA</b><small>Data 30 jours</small></div>
+    <div><b>×1,30</b><small>Rendu Dakar</small></div>
+  </div>
+
+  <div class="box">
+    <h5>La décision d'achat qui structure tout le reste</h5>
+    <p style="margin:0">Une sonde de référence METER TEROS 12 coûte <strong>211 000 FCFA rendue Dakar</strong> ; la sonde DFRobot SEN0604, qui donne humidité, température, pH et conductivité dans un corps IP68, coûte <strong>54 000 FCFA</strong>. C'est ce rapport de 1 à 4 qui rend le kit A possible à 300 000 FCFA. Le prix de la précision est assumé, et documenté page 13.</p>
+  </div>
+  <div class="pg-foot"><div>AgriTwin · dossier AKTIION 2026</div><div>Prix vérifiés le 24 novembre 2026</div></div>
+</section>
+
+<!-- ============ 1 + 2 ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">1 · Contrainte produit &nbsp;|&nbsp; 2 · Méthode</div><div class="n">p. 3</div></div>
+  <h2 class="sec">Ce que le matériel doit fournir</h2>
+  <p>Le Score Vert n'est pas une opinion : il se calcule à partir de quatre grandeurs. Le kit doit donc livrer ces quatre grandeurs, sinon la note est plafonnée ou tombe à zéro.</p>
+  <table>
+    <thead><tr><th style="width:26%">Grandeur du score</th><th style="width:16%">Poids</th><th>Conséquence matérielle</th></tr></thead>
+    <tbody>
+      <tr><td>Régularité hydrique</td><td>35 pts</td><td><strong>Deux profondeurs</strong> (15 cm et 35 cm) comparées chaque jour à la fenêtre 20–35 % d'humidité.</td></tr>
+      <tr><td>Santé du sol</td><td>25 pts</td><td><strong>EC et pH</strong> dans la même sonde, avec seuils 1,4 / 2,0 dS/m et pH 6–7,5.</td></tr>
+      <tr><td>Couverture végétale</td><td>20 pts</td><td>NDVI satellite (Sentinel-2) — le kit doit seulement <strong>horodater</strong> pour l'alignement.</td></tr>
+      <tr><td>Intégrité de la preuve</td><td>20 pts</td><td><strong>Scellé, accéléromètre, RSSI, niveau de batterie</strong> : si la chaîne est rompue, l'intégrité vaut 0.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box warn">
+    <h5>Conséquence directe sur la gamme</h5>
+    <p style="margin:0">Un capteur d'humidité nu à 12 000 FCFA, comme on en trouve à Dakar, ne suffit pas : il ne donne ni EC, ni pH, ni scellé, ni transmission. Le kit minimal <em>conforme</em> comporte deux profondeurs, EC/pH, un boîtier scellé et une liaison LoRa. C'est ce qui fixe le plancher à 300 000 FCFA et non à 50 000.</p>
+  </div>
+
+  <h3 style="margin-top:7mm">Méthode de chiffrage</h3>
+  <table>
+    <thead><tr><th>Paramètre</th><th>Valeur retenue</th><th>Justification</th></tr></thead>
+    <tbody>
+      <tr><td>Euro → FCFA</td><td class="num">655,957</td><td>Parité fixe BCEAO, confirmée au 24/11/2026.</td></tr>
+      <tr><td>Dollar → FCFA</td><td class="num">599,28</td><td>Taux interbancaire XE du 24/11/2026.</td></tr>
+      <tr><td>Livre → FCFA</td><td class="num">786</td><td>Cours de vente BCEAO.</td></tr>
+      <tr><td>Prix fournisseur</td><td>HT, hors port</td><td>Catalogues distributeurs Europe, États-Unis, Chine.</td></tr>
+      <tr><td>Coût « rendu Dakar »</td><td class="num">× 1,30</td><td>Fret, douane, transit, marge importateur — hypothèse à remplacer par un devis transitaire.</td></tr>
+      <tr><td>Prix local Sénégal</td><td>TTC (TVA 18 %)</td><td>Catalogues NRJSOLAIRE, Jumia, revendeurs Dakar.</td></tr>
+      <tr><td>Assemblage atelier</td><td class="num">6 000 FCFA/h</td><td>Hypothèse atelier Dakar.</td></tr>
+      <tr><td>Pose terrain</td><td>2 à 3 h + déplacement</td><td>Technicien électricien : ≈ 10 000–25 000 FCFA/jour.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="small"><strong>Ce que les totaux n'incluent pas :</strong> marge commerciale AgriTwin, garantie, pièces de rechange, formation (sauf kit C), abonnement plateforme, inflation, frais bancaires. Les prix importés sont HT et les prix locaux TTC : le mélange est volontaire, pour refléter le coût réel, mais doit être dit à l'oral.</p>
+  <div class="pg-foot"><div>Méthode : prix publics, taux du jour, fret ×1,30</div><div>p. 3</div></div>
+</section>
+
+<!-- ============ 3 CATALOGUE CAPTEURS ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">3 · Catalogue des capteurs</div><div class="n">p. 4</div></div>
+  <h2 class="sec">Sondes de sol, météo, niveau d'eau</h2>
+  <p class="lead">Six références suffisent à couvrir tous les besoins du projet, du prototype au pilote de recherche. Les prix sont ceux affichés par le fabricant ou un distributeur, le 24 novembre 2026.</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:21%">Référence</th><th style="width:31%">Ce qu'elle mesure</th><th class="num" style="width:13%">Prix relevé</th><th class="num" style="width:13%">Rendu Dakar</th><th>Usage dans la gamme</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>DFRobot SEN0604</strong><br><span class="src">RS485 · IP68</span></td>
+        <td>Humidité, température, <strong>pH, EC</strong> — un seul corps, bus Modbus</td>
+        <td class="num">69,00 $</td><td class="num">54 000</td>
+        <td><span class="tag">Retenue</span> Kits A, B, C — le meilleur compromis du marché</td>
+      </tr>
+      <tr>
+        <td><strong>DFRobot SEN0308</strong><br><span class="src">analogique · IP65</span></td>
+        <td>Humidité capacitive étanche</td>
+        <td class="num">14,90 $</td><td class="num">11 600</td>
+        <td>Zones secondaires, 2<sup>e</sup> et 3<sup>e</sup> profondeur</td>
+      </tr>
+      <tr>
+        <td><strong>DFRobot SEN0193</strong><br><span class="src">analogique · nu</span></td>
+        <td>Humidité capacitive, non étanche long terme</td>
+        <td class="num">5,90 $</td><td class="num">4 600</td>
+        <td>Prototype et démonstration, pas le terrain</td>
+      </tr>
+      <tr>
+        <td><strong>JXCT JXBS-3001-TR</strong><br><span class="src">RS485 · IP68</span></td>
+        <td>7-en-1 : humidité, T°, EC, pH <strong>et NPK</strong></td>
+        <td class="num">₹ 6 350<br><span class="src">≈ 75 $</span></td><td class="num">≈ 59 000</td>
+        <td><span class="tag grey">Option</span> fertilité — pH peu fiable (voir p. 13)</td>
+      </tr>
+      <tr>
+        <td><strong>METER TEROS 12</strong><br><span class="src">référence métrologique</span></td>
+        <td>Humidité, température, EC — précision recherche</td>
+        <td class="num">271,00 $</td><td class="num">211 000</td>
+        <td>Kit D — étalonnage et essais</td>
+      </tr>
+      <tr>
+        <td><strong>Autosen AF906</strong><br><span class="src">4–20 mA · 0–3 m</span></td>
+        <td>Niveau d'eau hydrostatique (bassin, forage)</td>
+        <td class="num">235,95 €</td><td class="num">201 000</td>
+        <td><span class="tag grey">Option</span> irrigation et ressource</td>
+      </tr>
+      <tr>
+        <td><strong>Ecowitt WH40H</strong><br><span class="src">autonome 868 MHz</span></td>
+        <td>Pluviomètre à bascule auto-vidant, 0,1 mm</td>
+        <td class="num">39,99 $</td><td class="num">31 000</td>
+        <td>Pluviométrie seule, sur kit A ou B</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Pourquoi la SEN0604, et pas la sonde à 12 000 FCFA du marché</h3>
+  <table>
+    <thead><tr><th>Critère exigé par le Score Vert</th><th>Sonde nue 12 000 FCFA</th><th>SEN0604 — 54 000 FCFA</th></tr></thead>
+    <tbody>
+      <tr><td>Deux profondeurs comparables</td><td>Oui, si câblée</td><td>Oui, jusqu'à 3 sur un bus</td></tr>
+      <tr><td>EC et pH</td><td><strong>Non</strong></td><td>Oui (±0,3 pH, ±3 % EC)</td></tr>
+      <tr><td>Étanchéité mesurée</td><td>Non (corrosion en 1 saison)</td><td>IP68, résine sous vide</td></tr>
+      <tr><td>Protocole industriel</td><td>Analogique, sensible au bruit</td><td>RS485 Modbus, 1 200 m de bus</td></tr>
+      <tr><td>Adressage multi-sondes</td><td>—</td><td>Oui (1 à 247), à valider en atelier</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box blue">
+    <h5>Ce que nous ne prendrons pas, et pourquoi</h5>
+    <p style="margin:0">Atlas Scientific (circuit + sonde ≈ 113 000 à 170 000 FCFA par grandeur) et TEROS 12 restent hors gamme standard : ils mesurent mieux, mais coûtent quatre fois plus et exigent un conditionnement de signal. Ils servent de <strong>référence d'étalonnage</strong>, pas d'équipement déployé.</p>
+  </div>
+  <div class="pg-foot"><div>Sources détaillées p. 13–14</div><div>p. 4</div></div>
+</section>
+
+<!-- ============ 4 ACQUISITION ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">4 · Acquisition, transmission, énergie</div><div class="n">p. 5</div></div>
+  <h2 class="sec">Le boîtier, la passerelle, l'énergie</h2>
+  <p class="lead">Le capteur ne vaut que par ce qui l'entoure : un nœud qui lit le bus, un boîtier qu'on ne peut pas ouvrir sans laisser de trace, une alimentation qui tient la saison des pluies, une liaison qui couvre la parcelle.</p>
+
+  <h4>Acquisition et transmission</h4>
+  <table>
+    <thead><tr><th style="width:22%">Référence</th><th style="width:32%">Rôle</th><th class="num" style="width:13%">Prix relevé</th><th class="num" style="width:13%">Rendu Dakar</th><th>Commentaire</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Milesight UC100</strong></td><td>Nœud LoRaWAN, maître RS485 Modbus</td><td class="num">46,22 €</td><td class="num">39 400</td><td><span class="tag">Retenu</span> kits A, B, C, D</td></tr>
+      <tr><td><strong>Dragino LSN50v2</strong></td><td>Nœud LoRaWAN IP66, 2 entrées analogiques</td><td class="num">45,00 €</td><td class="num">38 000</td><td>Variante pour capteurs analogiques</td></tr>
+      <tr><td><strong>Heltec WiFi LoRa 32 V3</strong></td><td>ESP32-S3 + SX1262, LoRaWAN et BLE</td><td class="num">17,90 $</td><td class="num">14 000</td><td><span class="tag grey">Prototype</span> cartes de démonstration</td></tr>
+      <tr><td><strong>Microchip ATECC608A</strong></td><td>Élément sécurisé : clé privée du scellé, signature</td><td class="num">0,68 $<br><span class="src">prix 5 000 pièces</span></td><td class="num">≈ 2 500</td><td>Rend le scellé opposable, pas seulement logique</td></tr>
+      <tr><td><strong>Dragino LPS8N</strong></td><td>Passerelle LoRaWAN intérieure, 8 canaux</td><td class="num">119,00 €</td><td class="num">101 500</td><td>Bureau, coopérative, zone couverte</td></tr>
+      <tr><td><strong>Dragino DLOS8N</strong></td><td>Passerelle LoRaWAN extérieure IP65, Ethernet/Wi-Fi</td><td class="num">251,26 €</td><td class="num">214 000</td><td><span class="tag">Retenue</span> kit C — 2 à 5 km de portée</td></tr>
+      <tr><td><strong>DLOS8N + 4G</strong></td><td>Idem, backhaul cellulaire autonome</td><td class="num">257,50 €</td><td class="num">220 000</td><td>Site sans Internet filaire</td></tr>
+      <tr><td><strong>Milesight UG65</strong></td><td>Passerelle semi-industrielle IP65, 2 000 nœuds</td><td class="num">332,77 €</td><td class="num">284 000</td><td><span class="tag grey">Option</span> multi-site dense</td></tr>
+      <tr><td><strong>Milesight UG65-4G</strong></td><td>Idem avec LTE</td><td class="num">550,00 €</td><td class="num">469 000</td><td>Déploiement hors couverture ADSL</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Boîtier, énergie et connectivité</h4>
+  <table>
+    <thead><tr><th style="width:31%">Poste</th><th style="width:29%">Référence / source</th><th class="num" style="width:19%">Prix</th><th>Remarque</th></tr></thead>
+    <tbody>
+      <tr><td>Boîtier IP66/67 180×130×150</td><td>Fibox MNX PCM 150/150</td><td class="num">28,77 £ → 29 000</td><td>Kit A, rendu Dakar</td></tr>
+      <tr><td>Boîtier IP66/67 255×180×150</td><td>Fibox MNX PCM 200/150</td><td class="num">88,70 € → 75 600</td><td>Kit B ; ≈ 60 € négociable en volume</td></tr>
+      <tr><td>Connecteurs M12 IP67 + câbles</td><td>Tensility / binder</td><td class="num">15–18 $ → 25 000</td><td>Étanchéité des traversées</td></tr>
+      <tr><td>Panneau solaire 20 Wc</td><td>NRJSOLAIRE, 177 FCFA/Wc</td><td class="num">12 000 TTC</td><td>Kit A</td></tr>
+      <tr><td>Panneau solaire 40 Wc</td><td>NRJSOLAIRE, 177 FCFA/Wc</td><td class="num">20 000 TTC</td><td>Kit B</td></tr>
+      <tr><td>Batterie 12 V 7 Ah GEL</td><td>Performances Services</td><td class="num">10 000–15 100</td><td>2 à 3 ans de durée de vie</td></tr>
+      <tr><td>Batterie 12 V 12 Ah</td><td>NRJSOLAIRE</td><td class="num">14 400</td><td>Kit B</td></tr>
+      <tr><td>Régulateur PWM 10 A</td><td>Kaaraangegui Solaire / Jumia</td><td class="num">3 140–17 500</td><td>Retenu 10 000 pour la tenue en charge</td></tr>
+      <tr><td>Pass data 30 jours, 6 Go</td><td>Orange Sénégal, pass prépayé</td><td class="num">2 000 / mois</td><td>25 Go à 5 000 FCFA si passerelle 4G</td></tr>
+      <tr><td>Station météo installée</td><td>Kolonell, Sénégal, 2026</td><td class="num">380 000</td><td>Pluie, T°, HR, vent — posée</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box">
+    <h5>Un point de vigilance sur la passerelle</h5>
+    <p style="margin:0">Une seule passerelle extérieure couvre plusieurs parcelles dans un rayon de 2 à 5 km en zone rurale dégagée. C'est le poste le plus cher du kit C et le principal levier de coût par hectare : il ne faut jamais en mettre une par parcelle.</p>
+  </div>
+  <div class="pg-foot"><div>Boîtier · énergie · data : postes sous-estimés d'un devis</div><div>p. 5</div></div>
+</section>
+
+<!-- ============ 5 KIT A ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">5 · Kit A — Essentiel</div><div class="n">p. 6</div></div>
+  <h2 class="sec">Rendre une parcelle bancable pour 300 000 FCFA</h2>
+  <p class="lead">Une parcelle de 0,5 à 2 ha, un producteur individuel, deux profondeurs de mesure. C'est le kit qu'on montre au jury : complet, posable en une demi-journée, et dont chaque ligne se justifie.</p>
+
+  <table>
+    <thead><tr><th style="width:38%">Composant</th><th style="width:10%" class="num">Qté</th><th class="num" style="width:16%">P.U. (FCFA)</th><th class="num" style="width:16%">Total</th><th>Rôle</th></tr></thead>
+    <tbody>
+      <tr><td>Sonde 4-en-1 RS485 SEN0604 (15 cm et 35 cm)</td><td class="num">2</td><td class="num">54 000</td><td class="num">108 000</td><td>Le cœur du score</td></tr>
+      <tr><td>Nœud LoRaWAN UC100</td><td class="num">1</td><td class="num">39 400</td><td class="num">39 400</td><td>Lecture + transmission</td></tr>
+      <tr><td>Boîtier IP67 + presse-étoupes</td><td class="num">1</td><td class="num">29 000</td><td class="num">29 000</td><td>Scellé physique</td></tr>
+      <tr><td>Connectique M12 + 4 m de câble</td><td class="num">1</td><td class="num">22 000</td><td class="num">22 000</td><td>Étanchéité</td></tr>
+      <tr><td>Scellé, accéléromètre, horloge</td><td class="num">1</td><td class="num">4 000</td><td class="num">4 000</td><td>Détection d'ouverture</td></tr>
+      <tr><td>Carte d'interface, protection, composants</td><td class="num">1</td><td class="num">12 000</td><td class="num">12 000</td><td>Bus RS485 isolé</td></tr>
+      <tr><td>Panneau 20 Wc</td><td class="num">1</td><td class="num">12 000</td><td class="num">12 000</td><td>Autonomie</td></tr>
+      <tr><td>Batterie 12 V 7 Ah</td><td class="num">1</td><td class="num">10 000</td><td class="num">10 000</td><td>Nuit et saison des pluies</td></tr>
+      <tr><td>Régulateur PWM 10 A</td><td class="num">1</td><td class="num">10 000</td><td class="num">10 000</td><td>Protection batterie</td></tr>
+      <tr><td>Mât, colliers, plaque de pose</td><td class="num">1</td><td class="num">10 000</td><td class="num">10 000</td><td>Hauteur de 1,5 m</td></tr>
+      <tr class="sub"><td>Sous-total matériel</td><td></td><td></td><td class="num">256 400</td><td></td></tr>
+      <tr><td>Assemblage et test (2 h)</td><td class="num">1</td><td class="num">12 000</td><td class="num">12 000</td><td>Atelier</td></tr>
+      <tr><td>Pose et mise en service</td><td class="num">1</td><td class="num">30 000</td><td class="num">30 000</td><td>Demi-journée + déplacement</td></tr>
+      <tr class="total"><td>Total kit A</td><td></td><td></td><td class="num">298 400</td><td>≈ 455 €</td></tr>
+    </tbody>
+  </table>
+
+  <div class="grid2">
+    <div>
+      <h4>Ce que l'exploitant obtient</h4>
+      <ul>
+        <li>un relevé toutes les heures sur deux profondeurs ;</li>
+        <li>une alerte quand l'humidité sort de la fenêtre 20–35 % ;</li>
+        <li>un dossier de preuve exportable pour la banque ou l'assureur ;</li>
+        <li>le badge « données capteur certifiées » dans l'application.</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ce qu'il n'obtient pas</h4>
+      <ul>
+        <li>pas de pluviométrie propre (option 31 000 FCFA) ;</li>
+        <li>pas de NPK ;</li>
+        <li>pas de mesure sur une troisième zone ;</li>
+        <li>pas de redondance si la sonde casse.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box">
+    <h5>Fourchette à annoncer</h5>
+    <p style="margin:0"><strong>280 000 – 320 000 FCFA</strong> (≈ 430–490 €). Sur 1,5 ha, cela représente <strong>≈ 200 000 FCFA/ha</strong> — un investissement qui ne se justifie que si la preuve débloque un crédit ou une assurance. C'est exactement l'argument du dossier.</p>
+  </div>
+  <div class="pg-foot"><div>Kit A · 1 parcelle · 2 profondeurs</div><div>p. 6</div></div>
+</section>
+
+<!-- ============ 6 KIT B ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">6 · Kit B — Trois zones</div><div class="n">p. 7</div></div>
+  <h2 class="sec">Trois zones, un seul boîtier, 450 000 FCFA</h2>
+  <p class="lead">Pour une exploitation de 2 à 10 ha qui cultive plusieurs parcellules ou plusieurs cycles. Le surcoût par rapport au kit A est presque entièrement dans les sondes : le reste de l'infrastructure est mutualisé.</p>
+
+  <table>
+    <thead><tr><th style="width:38%">Composant</th><th style="width:10%" class="num">Qté</th><th class="num" style="width:16%">P.U. (FCFA)</th><th class="num" style="width:16%">Total</th><th>Rôle</th></tr></thead>
+    <tbody>
+      <tr><td>Sonde 4-en-1 SEN0604 (une par zone)</td><td class="num">3</td><td class="num">54 000</td><td class="num">162 000</td><td>3 zones de référence</td></tr>
+      <tr><td>Nœud LoRaWAN UC100</td><td class="num">1</td><td class="num">39 400</td><td class="num">39 400</td><td>Jusqu'à 3 sondes sur le bus</td></tr>
+      <tr><td>Boîtier IP67 255×180×150</td><td class="num">1</td><td class="num">75 600</td><td class="num">75 600</td><td>Place pour la batterie 12 Ah</td></tr>
+      <tr><td>Connectique + 15 m de câble</td><td class="num">1</td><td class="num">35 000</td><td class="num">35 000</td><td>Écartement des zones</td></tr>
+      <tr><td>Scellé + accéléromètre</td><td class="num">1</td><td class="num">4 000</td><td class="num">4 000</td><td>Intégrité</td></tr>
+      <tr><td>Carte d'interface / bus RS485 isolé</td><td class="num">1</td><td class="num">15 000</td><td class="num">15 000</td><td>3 adresses Modbus</td></tr>
+      <tr><td>Panneau 40 Wc</td><td class="num">1</td><td class="num">20 000</td><td class="num">20 000</td><td>Autonomie renforcée</td></tr>
+      <tr><td>Batterie 12 V 12 Ah</td><td class="num">1</td><td class="num">14 400</td><td class="num">14 400</td><td>5 à 7 jours sans soleil</td></tr>
+      <tr><td>Régulateur PWM</td><td class="num">1</td><td class="num">10 000</td><td class="num">10 000</td><td>Protection</td></tr>
+      <tr><td>Mât et fixations</td><td class="num">1</td><td class="num">12 000</td><td class="num">12 000</td><td>Support panneau</td></tr>
+      <tr class="sub"><td>Sous-total matériel</td><td></td><td></td><td class="num">387 400</td><td></td></tr>
+      <tr><td>Assemblage (3 h)</td><td class="num">1</td><td class="num">18 000</td><td class="num">18 000</td><td>Atelier</td></tr>
+      <tr><td>Pose (3 sondes)</td><td class="num">1</td><td class="num">45 000</td><td class="num">45 000</td><td>Journée complète</td></tr>
+      <tr class="total"><td>Total kit B</td><td></td><td></td><td class="num">450 400</td><td>≈ 687 €</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box warn">
+    <h5>Le risque technique à traiter avant la soutenance</h5>
+    <p style="margin:0">Les trois SEN0604 doivent avoir des <strong>adresses Modbus distinctes</strong> pour partager un seul bus. Ce n'est pas confirmé par la fiche produit ; si le firmware interdit le changement d'adresse, il faut un UC100 par sonde (<strong>+39 400 FCFA par zone</strong>) ou passer au Milesight UC300. À vérifier en atelier avant de promettre le prix.</p>
+  </div>
+
+  <div class="grid2">
+    <div class="box blue" style="margin:0"><h5>Économie d'échelle</h5><p style="margin:0">Le coût par zone passe de 149 200 FCFA (kit A, 2 zones) à 129 100 FCFA (kit B, 3 zones) : le boîtier, l'énergie et la pose sont amortis.</p></div>
+    <div class="box" style="margin:0"><h5>Fourchette</h5><p style="margin:0"><strong>420 000 – 470 000 FCFA</strong>. Sur 5 ha : <strong>≈ 90 000 FCFA/ha</strong>, soit moins de la moitié du kit A.</p></div>
+  </div>
+  <div class="pg-foot"><div>Kit B · 3 zones · 2 à 10 ha</div><div>p. 7</div></div>
+</section>
+
+<!-- ============ 7 KIT C ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">7 · Kit C — Coopérative</div><div class="n">p. 8</div></div>
+  <h2 class="sec">Trois parcelles et une preuve collective</h2>
+  <p class="lead">C'est la configuration qui intéresse un jury, une coopérative ou un bailleur : trois exploitations membres partagent une passerelle et une station météo. Le coût par hectare chute parce que l'infrastructure est commune.</p>
+
+  <table>
+    <thead><tr><th style="width:44%">Poste</th><th style="width:10%" class="num">Qté</th><th class="num" style="width:15%">P.U. (FCFA)</th><th class="num" style="width:15%">Total</th><th>Commentaire</th></tr></thead>
+    <tbody>
+      <tr><td>Kit B — matériel</td><td class="num">3</td><td class="num">387 400</td><td class="num">1 162 200</td><td>Une nomenclature par membre</td></tr>
+      <tr><td>Passerelle extérieure DLOS8N</td><td class="num">1</td><td class="num">214 000</td><td class="num">214 000</td><td>Mutualisée, 2–5 km</td></tr>
+      <tr><td>Station météo installée</td><td class="num">1</td><td class="num">380 000</td><td class="num">380 000</td><td>Pluie, T°, HR, vent</td></tr>
+      <tr><td>Mât / pylône passerelle + parasurtenseur</td><td class="num">1</td><td class="num">60 000</td><td class="num">60 000</td><td>Hauteur et foudre</td></tr>
+      <tr><td>Pose des 3 kits</td><td class="num">3</td><td class="num">45 000</td><td class="num">135 000</td><td>3 journées terrain</td></tr>
+      <tr><td>Pose et paramétrage passerelle</td><td class="num">1</td><td class="num">80 000</td><td class="num">80 000</td><td>Réseau, serveur, VLAN</td></tr>
+      <tr><td>Formation et mise en service</td><td class="num">1</td><td class="num">55 000</td><td class="num">55 000</td><td>2 demi-journées</td></tr>
+      <tr class="total"><td>Total kit C</td><td></td><td></td><td class="num">2 086 200</td><td>≈ 3 180 €</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Ce que la mutualisation change</h3>
+  <table>
+    <thead><tr><th>Scénario</th><th class="num">Coût total</th><th class="num">Surface couverte</th><th class="num">FCFA/ha</th></tr></thead>
+    <tbody>
+      <tr><td>3 kits B isolés, sans passerelle ni météo</td><td class="num">1 351 200</td><td class="num">15 ha</td><td class="num">90 000</td></tr>
+      <tr><td>3 kits B avec 3 passerelles et 3 stations</td><td class="num">3 133 200</td><td class="num">15 ha</td><td class="num">209 000</td></tr>
+      <tr><td><strong>Kit C : 3 kits, 1 passerelle, 1 station</strong></td><td class="num">2 086 200</td><td class="num">40 ha</td><td class="num"><strong>52 000</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="small">L'écart entre les deux premières lignes (1,78 M FCFA) est le prix de la redondance. Nous ne la recommandons pas en zone dégagée : une passerelle, un point de panne, un contrat de maintenance clair.</p>
+
+  <div class="box">
+    <h5>Fourchette et argument de vente</h5>
+    <p style="margin:0"><strong>2,0 – 2,3 M FCFA</strong> pour trois parcelles et 40 ha, soit <strong>52 000 FCFA/ha</strong>. C'est le seul kit dont le coût par hectare descend sous le seuil qu'un crédit agricole peut absorber sur une campagne. À comparer aux 8–12 M FCFA d'un équipement IoT moyen par exploitation de 10 ha relevé sur le marché sénégalais.</p>
+  </div>
+  <div class="pg-foot"><div>Kit C · mutualisation passerelle + météo</div><div>p. 8</div></div>
+</section>
+
+<!-- ============ 8 KIT D ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">8 · Kit D — Recherche</div><div class="n">p. 9</div></div>
+  <h2 class="sec">La parcelle qui sert à prouver les autres</h2>
+  <p class="lead">Un kit D n'est pas un produit commercial : c'est l'instrument de mesure qui permet de dire, chiffres en main, que la sonde à 54 000 FCFA tient ses promesses. Sans lui, la comparaison de la page 4 reste une affirmation.</p>
+
+  <table>
+    <thead><tr><th style="width:46%">Composant</th><th style="width:10%" class="num">Qté</th><th class="num" style="width:14%">P.U. (FCFA)</th><th class="num" style="width:14%">Total</th><th>Rôle</th></tr></thead>
+    <tbody>
+      <tr><td>Sonde METER TEROS 12 (15 et 35 cm)</td><td class="num">2</td><td class="num">211 400</td><td class="num">422 800</td><td>Référence métrologique</td></tr>
+      <tr><td>Nœud UC100</td><td class="num">1</td><td class="num">39 400</td><td class="num">39 400</td><td>Acquisition</td></tr>
+      <tr><td>Boîtier, énergie, câblage</td><td class="num">1</td><td class="num">90 000</td><td class="num">90 000</td><td>Poste forfaitaire</td></tr>
+      <tr><td>Passerelle DLOS8N</td><td class="num">1</td><td class="num">214 000</td><td class="num">214 000</td><td>Couverture du site d'essai</td></tr>
+      <tr><td>Station météo</td><td class="num">1</td><td class="num">380 000</td><td class="num">380 000</td><td>ETP et pluie de référence</td></tr>
+      <tr><td>Pose, étalonnage, formation</td><td class="num">1</td><td class="num">150 000</td><td class="num">150 000</td><td>Campagne de comparaison</td></tr>
+      <tr class="total"><td>Total kit D</td><td></td><td></td><td class="num">1 296 200</td><td>≈ 1 976 €</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Protocole minimal de validation (à joindre au dossier)</h3>
+  <ul>
+    <li><strong>Trois répétitions</strong> par profondeur, SEN0604 et TEROS 12 côte à côte, dans le même horizon de sol.</li>
+    <li><strong>Quinze jours</strong> minimum, dont au moins un épisode pluvieux et un épisode sec.</li>
+    <li><strong>Étalonnage pH</strong> en solution tampon 4,01 / 7,00 avant et après la campagne.</li>
+    <li><strong>Critère d'acceptation :</strong> écart d'humidité ≤ 3 % volumique, EC ≤ 0,2 dS/m, pH ≤ 0,5 unité. Au-delà, la sonde est déclarée « indicative » et le libellé du Score Vert doit le dire.</li>
+  </ul>
+
+  <div class="box blue">
+    <h5>Ce que ce kit achète vraiment</h5>
+    <p style="margin:0">La crédibilité du chiffrage. Un jury demande « comment savez-vous que votre sonde à 54 000 FCFA vaut celle à 211 000 ? ». Le kit D est la réponse : un site, deux technologies, un protocole, un rapport d'écart. Coût : <strong>1,3 M FCFA</strong>, une fois, pour l'ensemble du programme.</p>
+  </div>
+  <div class="pg-foot"><div>Kit D · métrologie de référence</div><div>p. 9</div></div>
+</section>
+
+<!-- ============ 9 OPTIONS ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">9 · Options et montées en gamme</div><div class="n">p. 10</div></div>
+  <h2 class="sec">Ce qu'on peut vendre en plus, sans changer de kit</h2>
+  <p class="lead">Chaque option répond à une demande précise d'un segment. Toutes sont chiffrées avec un prix relevé ; aucune n'est indispensable au socle, ce qui les rend faciles à proposer en deuxième rendez-vous.</p>
+
+  <table>
+    <thead><tr><th style="width:24%">Option</th><th style="width:30%">Réponse au besoin</th><th class="num" style="width:12%">Prix relevé</th><th class="num" style="width:13%">Rendu Dakar</th><th>Segment</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pluviomètre WH40H</strong></td><td>La pluie sur la parcelle, sans station complète</td><td class="num">39,99 $</td><td class="num">31 000</td><td>Kit A / B, maraîchage</td></tr>
+      <tr><td><strong>Sonde 7-en-1 NPK</strong></td><td>Fertilisation raisonnée, conseil en engrais</td><td class="num">₹ 6 350</td><td class="num">≈ 59 000</td><td>Coopérative, agro-industrie</td></tr>
+      <tr><td><strong>Station autonome 4G</strong> WS6210</td><td>Météo complète, solaire, sans passerelle ni Wi-Fi</td><td class="num">329,99 $</td><td class="num">257 000</td><td>Site isolé, vitrine</td></tr>
+      <tr><td><strong>Station Dragino WSS-09</strong></td><td>9-en-1 : vent, pluie, PM2.5/PM10, bruit</td><td class="num">645 € HT</td><td class="num">550 000</td><td>Recherche environnementale</td></tr>
+      <tr><td><strong>Davis Vantage Vue</strong></td><td>Référence grand public, console incluse</td><td class="num">725 $</td><td class="num">565 000</td><td>Exploitation premium</td></tr>
+      <tr><td><strong>Davis Vantage Pro2 GroWeather</strong></td><td>ETP, rayonnement, abri ventilé</td><td class="num">1 320 $</td><td class="num">1 029 000</td><td>Bailleur, recherche</td></tr>
+      <tr><td><strong>Sonde de niveau AF906</strong></td><td>Niveau de bassin ou de forage, 0–3 m</td><td class="num">235,95 €</td><td class="num">201 000</td><td>Irrigation, périmètre irrigué</td></tr>
+      <tr><td><strong>Passerelle UG65-4G</strong></td><td>2 000 nœuds, IP65, LTE</td><td class="num">550 €</td><td class="num">469 000</td><td>Opérateur multi-sites</td></tr>
+      <tr><td><strong>Élément sécurisé ATECC608A</strong></td><td>Clé privée embarquée, signature du scellé</td><td class="num">0,68 $</td><td class="num">≈ 2 500</td><td>Tous kits — recommandé</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box warn">
+    <h5>Deux options à ne pas survendre</h5>
+    <p style="margin:0"><strong>Le NPK :</strong> le pH de cette famille de sondes est documenté comme peu fiable par des utilisateurs (valeur figée à 7,00 ou proche de 7,7, sans réaction en solution d'essai). À vendre comme tendance de fertilité, jamais comme mesure de laboratoire. <strong>La station à 550 000 FCFA :</strong> elle mesure des particules et du bruit, sans rapport avec le Score Vert ; elle ne se justifie que sur un projet de recherche.</p>
+  </div>
+
+  <h3>Ordre de priorité commercial</h3>
+  <table>
+    <thead><tr><th class="num" style="width:8%">Rang</th><th style="width:34%">Option</th><th>Pourquoi elle se vend</th><th class="num" style="width:16%">Prix</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Élément sécurisé</td><td>Rend la preuve opposable pour 2 500 FCFA : le meilleur argument du dossier</td><td class="num">2 500</td></tr>
+      <tr><td class="num">2</td><td>Pluviomètre</td><td>Le producteur comprend immédiatement « il a plu 12 mm chez moi »</td><td class="num">31 000</td></tr>
+      <tr><td class="num">3</td><td>Sonde NPK</td><td>Ouvre la porte du conseil en fertilisation, marge de service</td><td class="num">59 000</td></tr>
+      <tr><td class="num">4</td><td>Niveau d'eau</td><td>Périmètres irrigués, gestion de la ressource</td><td class="num">201 000</td></tr>
+      <tr><td class="num">5</td><td>Station météo</td><td>Vitrine et projet financé, pas de vente unitaire</td><td class="num">257 000+</td></tr>
+    </tbody>
+  </table>
+  <div class="pg-foot"><div>Options chiffrées · prix relevés le 24/11/2026</div><div>p. 10</div></div>
+</section>
+
+<!-- ============ 10 SEGMENTS ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">10 · Segments et modèles économiques</div><div class="n">p. 11</div></div>
+  <h2 class="sec">À qui vendre quoi, et à quel rythme</h2>
+
+  <table>
+    <thead><tr><th style="width:16%">Segment</th><th style="width:24%">Profil type</th><th class="num" style="width:10%">Surface</th><th style="width:13%">Kit</th><th class="num" style="width:16%">Budget d'achat</th><th>Alternative locative</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Petit producteur</strong></td><td>Maraîcher individuel, une zone, revenu saisonnier</td><td class="num">0,5–2 ha</td><td>A</td><td class="num">280–320 k</td><td>15 000–20 000 FCFA/mois</td></tr>
+      <tr><td><strong>Exploitation moyenne</strong></td><td>3 zones, salariés, accès au crédit intrants</td><td class="num">2–10 ha</td><td>B</td><td class="num">420–470 k</td><td>20 000–25 000 FCFA/mois</td></tr>
+      <tr><td><strong>Coopérative</strong></td><td>20–100 ha, plusieurs membres, preuve collective</td><td class="num">20–100 ha</td><td>C</td><td class="num">2,0–2,3 M</td><td>60 000–90 000 FCFA/mois</td></tr>
+      <tr><td><strong>Recherche / agro-industrie</strong></td><td>Station de référence, essais, certification</td><td class="num">1–5 ha</td><td>D</td><td class="num">1,25–1,45 M</td><td>sur devis</td></tr>
+      <tr><td><strong>IMF / assureur</strong></td><td>N'achète pas de matériel, consomme la preuve</td><td class="num">—</td><td>API + portail</td><td class="num">0 matériel</td><td>licence plateforme</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Trois façons de vendre le même kit</h3>
+  <table>
+    <thead><tr><th style="width:20%">Modèle</th><th style="width:40%">Mécanique</th><th>Ce que ça change pour le producteur</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Achat comptant</strong></td><td>Le producteur paie le kit, AgriTwin vend l'abonnement plateforme</td><td>Barrière d'entrée de 300 000 FCFA ; le kit lui appartient.</td></tr>
+      <tr><td><strong>Location / HaaS</strong></td><td>30 % d'apport puis 24 à 36 mois</td><td>Entrée à 90 000 FCFA puis ≈ 15 000–20 000 FCFA/mois. Modèle observé au Sénégal chez AgriSense.</td></tr>
+      <tr><td><strong>Subvention / projet</strong></td><td>Coopérative ou bailleur finance le kit C</td><td>Zéro coût pour le membre ; la valeur se mesure en hectares couverts et en dossiers bancables.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="kpi">
+    <div><b>300 000</b><small>Entrée de gamme (FCFA)</small></div>
+    <div><b>52 000</b><small>FCFA/ha en coopérative</small></div>
+    <div><b>4 ×</b><small>Écart TEROS 12 / SEN0604</small></div>
+    <div><b>2 500</b><small>FCFA pour sécuriser la preuve</small></div>
+  </div>
+
+  <div class="box">
+    <h5>La phrase à retenir pour le jury</h5>
+    <p style="margin:0">« Le kit complet coûte le prix de deux sacs d'engrais et demi par hectare en coopérative, et il ne se remplace pas chaque saison : il se contente de mesurer, sceller et transmettre. » Sur 40 ha, 52 000 FCFA/ha est l'ordre de grandeur d'une intrant de campagne — c'est l'argument de diffusion.</p>
+  </div>
+  <div class="pg-foot"><div>Segments · achat, location, subvention</div><div>p. 11</div></div>
+</section>
+
+<!-- ============ 11 TCO ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">11 · Coûts récurrents et possession</div><div class="n">p. 12</div></div>
+  <h2 class="sec">Le prix d'achat n'est pas le coût</h2>
+  <p class="lead">Un producteur compare ce qu'il paie chaque année à ce qu'il gagne. Le tableau ci-dessous est donc plus important que celui du kit A.</p>
+
+  <table>
+    <thead><tr><th style="width:46%">Poste récurrent</th><th class="num" style="width:18%">Montant (FCFA)</th><th>Fréquence</th></tr></thead>
+    <tbody>
+      <tr><td>Pass data passerelle (6 Go)</td><td class="num">2 000</td><td>mois</td></tr>
+      <tr><td>Plateforme AgriTwin</td><td class="num">5 000–15 000</td><td>mois (hypothèse ; benchmark local 65 000 pour une offre complète)</td></tr>
+      <tr><td>Maintenance préventive (nettoyage, joints, contrôle)</td><td class="num">20 000</td><td>an et par kit</td></tr>
+      <tr><td>Étalonnage pH (solutions + main-d'œuvre)</td><td class="num">15 000</td><td>an</td></tr>
+      <tr><td>Remplacement batterie</td><td class="num">10 000–14 400</td><td>2 à 3 ans</td></tr>
+      <tr><td>Remplacement sonde 4-en-1</td><td class="num">54 000</td><td>2 à 3 ans</td></tr>
+      <tr><td>Abonnement réseau LoRaWAN opéré</td><td class="num">sur devis</td><td>mois (alternative à la passerelle privée)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Coût de possession du kit A sur 3 ans</h3>
+  <table>
+    <thead><tr><th>Ligne</th><th class="num">Calcul</th><th class="num">Total</th></tr></thead>
+    <tbody>
+      <tr><td>Matériel et pose</td><td class="num">une fois</td><td class="num">298 400</td></tr>
+      <tr><td>Plateforme + data</td><td class="num">7 000 × 36</td><td class="num">252 000</td></tr>
+      <tr><td>Maintenance et étalonnage</td><td class="num">20 000 + 15 000 × 3</td><td class="num">60 000</td></tr>
+      <tr><td>Batterie de rechange</td><td class="num">1 × 10 000</td><td class="num">10 000</td></tr>
+      <tr class="total"><td>Total sur 3 ans</td><td class="num">≈ 207 000 / an</td><td class="num">620 400</td></tr>
+    </tbody>
+  </table>
+  <p class="small">Lecture : sur trois ans, le coût complet dépasse le double du prix affiché. C'est ce chiffre — pas 300 000 — qu'il faut mettre en face du revenu d'une campagne et du taux d'intérêt d'un crédit.</p>
+
+  <div class="grid2">
+    <div class="box blue" style="margin:0">
+      <h5>Levier 1 — la passerelle partagée</h5>
+      <p style="margin:0">En kit C, le coût d'infrastructure par parcelle tombe de 214 000 à 71 000 FCFA. C'est le premier levier de compétitivité, avant toute négociation fournisseur.</p>
+    </div>
+    <div class="box" style="margin:0">
+      <h5>Levier 2 — le volume</h5>
+      <p style="margin:0">En commande de 100 kits, compter −20 à −30 % sur les sondes et les nœuds. Le kit A passerait sous 250 000 FCFA, sans changer de fournisseur.</p>
+    </div>
+  </div>
+  <div class="pg-foot"><div>TCO 3 ans · kit A</div><div>p. 12</div></div>
+</section>
+
+<!-- ============ 12 LIMITES ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">12 · Limites du chiffrage</div><div class="n">p. 13</div></div>
+  <h2 class="sec">Ce que ces prix ne prouvent pas</h2>
+  <p class="lead">Un dossier de concours perd sa crédibilité sur une seule ligne exagérée. Voici donc, sans détour, ce qui reste une hypothèse dans les pages précédentes.</p>
+
+  <table>
+    <thead><tr><th style="width:26%">Point</th><th>Ce qu'il faut savoir</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Prix catalogue, pas devis</strong></td><td>Les prix fournisseurs sont publics et unitaires. Aucun n'a été négocié ni confirmé par un proforma. En volume, −20 à −30 % sont plausibles sur les sondes et les nœuds.</td></tr>
+      <tr><td><strong>Le ×1,30</strong></td><td>Hypothèse de fret, douane, transit et marge importateur, non un devis transitaire. La fourchette réelle va de 1,2 à 1,5 selon le mode d'import (aérien vs maritime).</td></tr>
+      <tr><td><strong>Précision de la SEN0604</strong></td><td>Annoncée IP68 et RS485, mais ses performances pH/EC en sol ne sont pas documentées par un essai indépendant. C'est précisément l'objet du kit D. Ne pas promettre une précision de laboratoire.</td></tr>
+      <tr><td><strong>Adresses Modbus</strong></td><td>Le partage d'un bus par trois sondes n'est pas confirmé par la fiche produit. Risque chiffré : +39 400 FCFA par zone si un nœud par sonde est nécessaire.</td></tr>
+      <tr><td><strong>Main-d'œuvre</strong></td><td>Estimée à partir des grilles de salaires sénégalaises (10 000–25 000 FCFA/jour), pas d'un devis d'installateur. Une équipe de Dakar peut facturer plus.</td></tr>
+      <tr><td><strong>Régime de taxe</strong></td><td>Les prix importés sont HT, les prix locaux TTC (18 %). Les totaux mélangent volontairement les deux pour refléter le coût réel : à expliquer à l'oral.</td></tr>
+      <tr><td><strong>Change</strong></td><td>L'euro est fixe (655,957) ; le dollar a été converti à 599,28 le 24/11/2026. Une variation de 5 % du dollar déplace les kits de 3 à 5 %.</td></tr>
+      <tr><td><strong>Durée de vie</strong></td><td>Les 2–3 ans de batterie et de sonde sont des ordres de grandeur constructeur, non mesurés sur une saison des pluies sénégalaise.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box warn">
+    <h5>Trois vérifications à faire avant l'engagement</h5>
+    <ul style="margin:0 0 0 0">
+      <li>Demander un <strong>proforma</strong> à DFRobot et à Dragino, en quantité 10 et 100.</li>
+      <li>Obtenir un <strong>devis transitaire</strong> Casablanca/Dakar ou aérien Shenzhen→Dakar pour 30 kg.</li>
+      <li>Tester en atelier <strong>trois SEN0604 sur un même bus</strong> avec un UC100, et consigner les adresses.</li>
+    </ul>
+  </div>
+
+  <p class="small" style="margin-top:4mm">Tous les prix de ce document ont été relevés le <strong>24 novembre 2026</strong> sur les pages publiques listées ci-après. Un prix non sourcé est signalé « sur devis » ; aucun prix n'a été estimé sans le dire.</p>
+  <div class="pg-foot"><div>Limites assumées · à dire à l'oral</div><div>p. 13</div></div>
+</section>
+
+<!-- ============ SOURCES 1 ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">Sources · 1/2</div><div class="n">p. 14</div></div>
+  <h2 class="sec">Sondes, acquisition, passerelles</h2>
+  <p class="small">Consultées le 24 novembre 2026. Les prix sont ceux affichés à cette date ; ils peuvent changer sans préavis.</p>
+
+  <h4>Sondes de sol</h4>
+  <table>
+    <thead><tr><th style="width:30%">Produit</th><th class="num" style="width:16%">Prix</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>DFRobot SEN0604 (4-en-1 RS485 IP68)</td><td class="num">69,00 $</td><td class="src">dfrobot.com/product-2830.html</td></tr>
+      <tr><td>DFRobot SEN0308 (humidité IP65)</td><td class="num">14,90 $</td><td class="src">dfrobot.com/product-2054.html</td></tr>
+      <tr><td>DFRobot SEN0193 (capacitif)</td><td class="num">5,90 $</td><td class="src">dfrobot.com/product-1385.html</td></tr>
+      <tr><td>JXCT JXBS-3001-TR (7-en-1)</td><td class="num">₹ 6 350</td><td class="src">techiesms.com/product/jxbs-3001-tr-rs485-7-in-1-soil-sensor-2/</td></tr>
+      <tr><td>METER TEROS 12</td><td class="num">271,00 $</td><td class="src">metergroup.com/products/teros-12</td></tr>
+      <tr><td>Autosen AF906 (niveau 0–3 m)</td><td class="num">235,95 €</td><td class="src">autosen.com/fr/Capteurs-Process/Capteurs-de-niveau/Sonde-de-niveau-hydrostatique-AF906</td></tr>
+      <tr><td>Fiche terrain pH JXBS-3001 (fiabilité pH)</td><td class="num">—</td><td class="src">sankhyafarms.com/sensors/jxbs-3001-tr-7in1</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Météo</h4>
+  <table>
+    <thead><tr><th style="width:30%">Produit</th><th class="num" style="width:16%">Prix</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>Ecowitt WH40H (pluviomètre)</td><td class="num">39,99 $</td><td class="src">shop.ecowitt.com/products/wh40h</td></tr>
+      <tr><td>Ecowitt WS6210 (station 4G solaire)</td><td class="num">329,99 $</td><td class="src">shop.ecowitt.com/products/wittfield-ws6210-ws6210s</td></tr>
+      <tr><td>Dragino WSS-09 (9-en-1)</td><td class="num">645,00 € HT</td><td class="src">sparwan.com/products/wss-09-station-meteo-lorawan-9-en-1-dragino</td></tr>
+      <tr><td>Davis Vantage Vue 6242</td><td class="num">725,00 $</td><td class="src">davisnet.com/products/vantage-vue-weather-station-with-weatherlink-console</td></tr>
+      <tr><td>Davis Vantage Pro2 GroWeather</td><td class="num">1 320,00 $</td><td class="src">davisnet.com/products/groweather-cabled-integrated-sensor-suite</td></tr>
+      <tr><td>Station météo posée, Sénégal</td><td class="num">380 000 FCFA</td><td class="src">kolonell.com/fr/blog/agriculture-connectee-iot-senegal-2026</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Acquisition, nœuds, passerelles</h4>
+  <table>
+    <thead><tr><th style="width:30%">Produit</th><th class="num" style="width:16%">Prix</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>Milesight UC100</td><td class="num">46,22 €</td><td class="src">shopiot.eu/collections/lorawan-controllers-bridges</td></tr>
+      <tr><td>Dragino LSN50v2</td><td class="num">45,00 €</td><td class="src">shop.molukas.com/en/nodes/77-dragino-lsn50v2-lorawan-waterproof-long-range-sensor-node-eu868</td></tr>
+      <tr><td>Heltec WiFi LoRa 32 V3</td><td class="num">17,90 $</td><td class="src">heltec.org/project/wifi-lora-32-v3</td></tr>
+      <tr><td>Microchip ATECC608A (5 000 pcs)</td><td class="num">0,68 $</td><td class="src">microchip.com/en-us/product/ATECC608A</td></tr>
+      <tr><td>Dragino LPS8N</td><td class="num">119,00 €</td><td class="src">invibitshop.com/products/dragino-lps8n-indoor-lorawan-gateway-ethernet-wifi-eu868</td></tr>
+      <tr><td>Dragino DLOS8N</td><td class="num">251,26 €</td><td class="src">shopiot.eu/products/dragino-dlos8n-outdoor-lorawan-gateway-sx1302</td></tr>
+      <tr><td>Dragino DLOS8N + 4G</td><td class="num">257,50 €</td><td class="src">invibitshop.com/products/dragino-dlos8n-outdoor-lorawan-gateway-ethernet-wi-fi-eu868</td></tr>
+      <tr><td>Milesight UG65 / UG65-4G</td><td class="num">332,77 / 550 €</td><td class="src">shop.vemcogroup.com/fr/products/milesight-ug65-indoor-lorawan-gateway</td></tr>
+    </tbody>
+  </table>
+  <div class="pg-foot"><div>Sources · 1/2</div><div>p. 14</div></div>
+</section>
+
+<!-- ============ SOURCES 2 ============ -->
+<section class="page">
+  <div class="pg-head"><div class="t">Sources · 2/2</div><div class="n">p. 15</div></div>
+  <h2 class="sec">Énergie, boîtiers, data, change</h2>
+
+  <h4>Boîtier et connectique</h4>
+  <table>
+    <thead><tr><th style="width:30%">Produit</th><th class="num" style="width:16%">Prix</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>Fibox PCM 150/150</td><td class="num">28,77 £ HT</td><td class="src">ilecsys.co.uk/manufacturers/fibox/mnx/pcm-150-150-g</td></tr>
+      <tr><td>Fibox PCM 200/150</td><td class="num">88,70 € HT</td><td class="src">evg.de/en/pcm_200150_t-fibox_enclosure_pc_255x180x150_ip66_ip67_ik08</td></tr>
+      <tr><td>Connecteurs M12 IP67</td><td class="num">15–18 $</td><td class="src">tensility.com/collections/category-connectors-circular</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Énergie et data au Sénégal</h4>
+  <table>
+    <thead><tr><th style="width:30%">Poste</th><th class="num" style="width:16%">Prix</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>Panneaux, 177 FCFA/Wc (200 Wc à 35 400)</td><td class="num">TTC</td><td class="src">energiesolaire.sn/prix-panneau-solaire-senegal</td></tr>
+      <tr><td>Batterie 12 V 7 Ah GEL</td><td class="num">10 000</td><td class="src">performanceservices.sn — batterie onduleur solaire gel 12v 7ah</td></tr>
+      <tr><td>Batteries 12–09 / 12–12 Ah</td><td class="num">12–14 400</td><td class="src">nrjsolaires.com/collections/batterie</td></tr>
+      <tr><td>Régulateur PWM (dès 3 140)</td><td class="num">FCFA</td><td class="src">jumia.sn/mlp-controleur-charge-solaire</td></tr>
+      <tr><td>Régulateur PWM 20 A</td><td class="num">10 000</td><td class="src">kaaraangeguisolaire.com/wdk-listing/regulateur-pwm-20a-solar</td></tr>
+      <tr><td>Pass data 30 j, 6 Go / 25 Go</td><td class="num">2 000 / 5 000</td><td class="src">vivreausenegal.fr/pratique/internet-mobile</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Marché et références</h4>
+  <table>
+    <thead><tr><th style="width:30%">Référence</th><th class="num" style="width:16%">Prix</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>Capteur d'humidité en gros, Dakar</td><td class="num">12 000</td><td class="src">kolonell.com/fr/blog/agriculture-connectee-iot-senegal-2026</td></tr>
+      <tr><td>Équipement IoT moyen, exploitation 10 ha</td><td class="num">8–12 M</td><td class="src">kolonell.com/en/blog/iot-connected-agriculture-senegal-2026</td></tr>
+      <tr><td>Davis Vantage Pro2 posée</td><td class="num">1,8–2,5 M</td><td class="src">kolonell.com/en/blog/iot-irrigation-senegal-suppliers-2026</td></tr>
+      <tr><td>SoilSense, achat / location</td><td class="num">649 € / 300 €·an</td><td class="src">soilsense.io/fr/systeme</td></tr>
+      <tr><td>Station Weenat</td><td class="num">560 € HT</td><td class="src">station-meteo.io/weenat</td></tr>
+      <tr><td>Salaires techniciens électriciens</td><td class="num">219–648 k/mois</td><td class="src">wageindicator.org/fr-sn/travail-au-senegal</td></tr>
+    </tbody>
+  </table>
+
+  <h4>Change</h4>
+  <table>
+    <thead><tr><th style="width:30%">Taux</th><th class="num" style="width:16%">Valeur</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>EUR → XOF (parité fixe)</td><td class="num">655,957</td><td class="src">tresor.economie.gouv.fr — zone franc</td></tr>
+      <tr><td>USD → XOF (24/11/2026)</td><td class="num">599,28</td><td class="src">xe.com/currencyconverter/convert/?From=USD&amp;To=XOF</td></tr>
+      <tr><td>Cours BCEAO</td><td class="num">—</td><td class="src">bceao.int/fr/cours/cours-des-devises-contre-Franc-CFA</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box" style="margin-top:5mm">
+    <h5>Comment citer ce document</h5>
+    <p style="margin:0">AgriTwin, <em>Kits et équipements — recherche matérielle et chiffrage</em>, version 1.0, 24 novembre 2026, pièce jointe au dossier AKTIION 2026 (EPT Thiès). Prix relevés sur catalogues publics, convertis au taux du jour.</p>
+  </div>
+  <div class="pg-foot"><div>AgriTwin · fin du document</div><div>p. 15</div></div>
+</section>
+
+</body>
+</html>
